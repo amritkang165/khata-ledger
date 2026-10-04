@@ -28,7 +28,6 @@ UI_DIR = Path(__file__).parent / "ui"
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
     ledger.initialize()
-    ledger.seed_demo()
     yield
 
 

@@ -14,7 +14,7 @@ This is a runnable vertical slice with local ledger storage, synthetic-only Atla
 - A deterministic local parser keeps the demo usable when Ollama is unavailable and reports that fallback in the response.
 - Entries below `0.6` confidence, or with no amount, go to `pending_reviews` and never touch the ledger.
 - Customer names are fuzzy-matched, including common honorifics such as “bhai” and “ji”.
-- SQLite contains eight synthetic customers and 30+ demo transactions.
+- SQLite starts empty and records only notes entered by the shopkeeper.
 - `GET /api/brief` returns outstanding totals, repayment patterns, age, and Hinglish collection messages.
 - The single-page UI shows note processing, the ledger, and the collection brief.
 - Sentry spans record the model, system prompt, latency, token usage, and a `parse_failure` tag when configured. Parsed financial output is redacted by default.
@@ -78,9 +78,9 @@ The financial system of record is SQLite. The app does not store uploaded audio.
 - `GET /api/brief`: weekly collection brief
 - `GET /api/health`: service and model configuration
 
-## Seed assets
+## Training and evaluation assets
 
-The ledger seeds itself only when its transaction table is empty. Generate the reproducible 200-example synthetic extraction corpus with:
+Synthetic data is never inserted into the real ledger. Generate the reproducible 200-example extraction corpus with:
 
 ```bash
 python scripts/seed/generate_transcripts.py

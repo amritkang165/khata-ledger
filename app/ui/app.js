@@ -6,9 +6,13 @@ async function refresh() {
   const [ledgerData, brief] = await Promise.all([
     fetch('/api/ledger').then(r => r.json()), fetch('/api/brief').then(r => r.json())
   ]);
-  document.querySelector('#ledger').innerHTML = ledgerData.customers.map(row => `<tr><td>${escapeHtml(row.name)}</td><td class="money">${rupees.format(row.outstanding_rupees)}</td><td>${row.last_activity || '—'}</td><td>${row.transaction_count}</td></tr>`).join('');
+  document.querySelector('#ledger').innerHTML = ledgerData.customers.length
+    ? ledgerData.customers.map(row => `<tr><td>${escapeHtml(row.name)}</td><td class="money">${rupees.format(row.outstanding_rupees)}</td><td>${row.last_activity || '—'}</td><td>${row.transaction_count}</td></tr>`).join('')
+    : '<tr><td colspan="4">Your ledger is empty. Add the first voice note above.</td></tr>';
   document.querySelector('#brief-total').textContent = `${rupees.format(brief.total_outstanding)} to collect`;
-  document.querySelector('#brief-list').innerHTML = brief.customers.map(item => `<article class="brief-item"><h3>${escapeHtml(item.customer_name)} · ${rupees.format(item.outstanding_rupees)}</h3><p>${item.days_open} days open. ${escapeHtml(item.pattern_note)}</p><p class="message">“${escapeHtml(item.collection_message)}”</p></article>`).join('');
+  document.querySelector('#brief-list').innerHTML = brief.customers.length
+    ? brief.customers.map(item => `<article class="brief-item"><h3>${escapeHtml(item.customer_name)} · ${rupees.format(item.outstanding_rupees)}</h3><p>${item.days_open} days open. ${escapeHtml(item.pattern_note)}</p><p class="message">“${escapeHtml(item.collection_message)}”</p></article>`).join('')
+    : '<p>No outstanding credit yet.</p>';
 }
 
 form.addEventListener('submit', async event => {

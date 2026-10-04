@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import sqlite3
 from contextlib import contextmanager
-from datetime import date, timedelta
+from datetime import date
 from pathlib import Path
 from typing import Iterator
 
@@ -115,32 +115,3 @@ class Ledger:
                    ORDER BY t.happened_on, t.id"""
             ).fetchall()
         return [dict(row) for row in rows]
-
-    def seed_demo(self) -> None:
-        with self.connect() as connection:
-            if connection.execute("SELECT COUNT(*) FROM transactions").fetchone()[0]:
-                return
-        names = ["Ramesh", "Sunita", "Iqbal", "Pooja", "Mohan", "Kavita", "Deepak", "Shabnam"]
-        contexts = ["bachche ki fees", "diwali samaan", "ration", "dawai", "school books"]
-        today = date.today()
-        for idx, name in enumerate(names):
-            for cycle in range(4):
-                age = 70 - idx * 3 - cycle * 14
-                amount = 180 + idx * 85 + cycle * 120
-                given_on = today - timedelta(days=max(age, 2))
-                self.add_transaction(
-                    customer_name=name, amount_rupees=amount,
-                    transaction_type="credit_given", due_day="Friday",
-                    context=contexts[(idx + cycle) % len(contexts)],
-                    transcript="synthetic demo seed", happened_on=given_on.isoformat(),
-                )
-                if cycle < 3 or idx % 3 == 0:
-                    lag = 5 + ((idx * 3 + cycle * 4) % 18)
-                    self.add_transaction(
-                        customer_name=name, amount_rupees=amount,
-                        transaction_type="credit_paid", due_day=None,
-                        context=contexts[(idx + cycle) % len(contexts)],
-                        transcript="synthetic demo seed",
-                        happened_on=(given_on + timedelta(days=lag)).isoformat(),
-                    )
-
