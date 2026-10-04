@@ -168,11 +168,32 @@
         <article class="card entry-card" id="new-entry">
           <div class="section-title"><div><p class="overline">NEW VOICE NOTE</p><h2>Add to khata</h2><p>Record a note exactly as you would say it across the counter.</p></div></div>
           <form id="note-form">
-            <button type="button" id="record" class="record-button"><span class="mic" aria-hidden="true">🎙</span><span class="record-copy"><b>Start voice note</b><small id="record-status">Tap to begin recording</small></span><span class="voice-meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></button>
-            <label class="file-row"><span>Upload existing audio</span><input id="audio" name="audio" type="file" accept="audio/*"></label>
-            <div class="divider"><span>or enter a note manually</span></div>
-            <textarea id="transcript" name="transcript" placeholder="Example: Ramesh ko 850 rupaye ka ration diya, Friday ko dega"></textarea>
-            <button type="submit" class="primary">Process and add to khata</button>
+            <div class="voice-action-row">
+              <button type="button" id="record" class="record-button" aria-label="Start recording a voice note" aria-pressed="false">
+                <span class="mic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 15a4 4 0 0 0 4-4V6a4 4 0 1 0-8 0v5a4 4 0 0 0 4 4Z"/><path d="M5 10.5v.5a7 7 0 0 0 14 0v-.5M12 18v3M9 21h6"/></svg></span>
+                <span class="record-copy"><b id="record-title">Tap to speak</b><small id="record-status">Say the customer, amount and what they bought</small></span>
+                <span class="recording-strip" aria-hidden="true">
+                  <span id="record-time" class="record-time">00:00</span>
+                  <span class="voice-meter"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+                </span>
+              </button>
+              <div class="voice-side-actions">
+                <button type="button" id="discard-note" class="discard-note hidden" aria-label="Discard this voice note" title="Discard note">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+                </button>
+                <button type="submit" class="primary submit-note" aria-label="Process and add to khata" title="Add to khata">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </button>
+              </div>
+            </div>
+            <details class="alternate-entry">
+              <summary>Use an audio file or type instead</summary>
+              <div class="alternate-entry-body">
+                <label class="file-row"><span>Upload existing audio</span><input id="audio" name="audio" type="file" accept="audio/*"></label>
+                <div class="divider"><span>or enter a note manually</span></div>
+                <textarea id="transcript" name="transcript" placeholder="Example: Ramesh ko 850 rupaye ka ration diya, Friday ko dega"></textarea>
+              </div>
+            </details>
           </form>
           <div id="result" class="result hidden" aria-live="polite"></div>
         </article>
@@ -191,12 +212,41 @@
       </section>
 
       <section class="card" id="passbook">
-        <div class="section-title"><div><p class="overline">PASSBOOK</p><h2>Transaction history</h2><p>Review every credit and payment recorded for this shop.</p></div></div>
+        <div class="section-title"><div><p class="overline">PASSBOOK</p><h2>Transaction history</h2><p>Review every credit and payment recorded for this shop.</p></div>
+          <div class="transaction-tools">
+            <label class="transaction-search"><span class="sr-only">Search transactions</span><input id="transaction-search" type="search" placeholder="Search customer"></label>
+            <select id="transaction-filter" aria-label="Filter transactions by type"><option value="all">All entries</option><option value="credit_given">Credit given</option><option value="credit_paid">Payments</option></select>
+          </div>
+        </div>
         <div class="table-wrap"><table><thead><tr><th>Date</th><th>Customer</th><th>Entry type</th><th>Amount</th><th>Due note</th><th></th></tr></thead><tbody id="transactions"></tbody></table></div>
       </section>
     </main>
-    <footer><b>Transcription is cloud for dialect accuracy; every rupee of data stays on this machine.</b></footer>
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      <a href="#overview" class="active" data-section="overview"><span>⌂</span>Home</a>
+      <a href="#new-entry" data-section="new-entry"><span>●</span>Voice</a>
+      <a href="#customers" data-section="customers"><span>◎</span>Customers</a>
+      <a href="#passbook" data-section="passbook"><span>≡</span>History</a>
+    </nav>
+    <footer>
+      <b>Khata Ledger — bol ke likho, hisaab simple rakho.</b>
+      <small>© 2026 Amrit Kang. All rights reserved.</small>
+    </footer>
   </div>
+
+  <dialog id="message-dialog" class="message-dialog" aria-labelledby="message-title">
+    <div class="message-dialog-head">
+      <div><p class="overline">PAYMENT REMINDER</p><h2 id="message-title">Message customer</h2></div>
+      <button type="button" id="close-message" class="dialog-close" aria-label="Close message">×</button>
+    </div>
+    <p class="message-help">Check the account history, then copy or share this message.</p>
+    <textarea id="reminder-message" readonly aria-label="Payment reminder message"></textarea>
+    <p id="message-feedback" class="message-feedback" role="status" aria-live="polite"></p>
+    <div class="message-actions">
+      <button type="button" id="copy-message" class="outline-button dark">Copy message</button>
+      <button type="button" id="share-message" class="primary">Share / send</button>
+    </div>
+  </dialog>
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
   <script src="/static/app.js"></script>
 </body>
 </html>
