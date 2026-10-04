@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Khata Ledger</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header><div><span class="eyebrow">LOCAL-FIRST · VOICE-FIRST</span><h1>Khata Ledger</h1><p>Bol ke likho. Hisaab machine par hi rahega.</p></div><div class="privacy">☁️ Audio → transcription only<br>🔒 Every rupee stays local</div></header>
+  <main>
+    <section class="capture card">
+      <h2>New voice note</h2>
+      <p class="muted">Upload audio for ElevenLabs Scribe, or use a transcript while developing.</p>
+      <form id="note-form">
+        <input id="audio" name="audio" type="file" accept="audio/*">
+        <div class="or">or</div>
+        <textarea id="transcript" name="transcript" placeholder="Ramesh bhai 850 rupaye ka ration, Friday tak dega"></textarea>
+        <button type="submit">Add to khata</button>
+      </form>
+      <div id="result" class="result hidden"></div>
+    </section>
+    <section class="card"><div class="section-head"><h2>Current ledger</h2><button class="secondary" id="refresh">Refresh</button></div><div class="table-wrap"><table><thead><tr><th>Customer</th><th>Outstanding</th><th>Last activity</th><th>Entries</th></tr></thead><tbody id="ledger"></tbody></table></div></section>
+    <section class="brief card"><div class="section-head"><div><span class="eyebrow">MONDAY COLLECTION BRIEF</span><h2 id="brief-total">Loading…</h2></div></div><div id="brief-list" class="brief-grid"></div></section>
+    <section class="card"><div class="section-head"><div><span class="eyebrow">ATLAS VECTOR SEARCH · SYNTHETIC ONLY</span><h2>Similar repayment patterns</h2></div></div><p class="muted">This panel queries synthetic profiles only. Real customers and the SQLite ledger are never uploaded.</p><div class="similar-controls"><select id="similar-profile"><option value="SYN-001">Asha · school expenses</option><option value="SYN-002">Bharat · ration installments</option><option value="SYN-004">Danish · festival delays</option><option value="SYN-005">Ekta · medicine</option></select><button id="find-similar">Find similar</button></div><div id="similar-list" class="brief-grid"></div></section>
+  </main>
+  <footer>Transcription is cloud for dialect accuracy; every rupee of data stays on this machine.</footer>
+  <script src="/static/app.js"></script>
+</body>
+</html>
