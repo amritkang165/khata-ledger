@@ -1,130 +1,300 @@
 # Khata Ledger
 
-A voice-first credit ledger for a kirana shopkeeper who will speak a note but will not type one. A note is transcribed by ElevenLabs Scribe, structured by Gemma running through local Ollama, matched to a customer, and written to local SQLite. A Monday brief turns the ledger into a practical collection list.
+### Bol ke likho. Hisaab simple rakho.
 
-> **Transcription is cloud for dialect accuracy; every rupee of data stays on this machine.**
+Khata Ledger is a voice-first credit ledger for kirana stores and other small shops. A shopkeeper can speak a natural note such as:
 
-This is a runnable vertical slice with local ledger storage, synthetic-only Atlas pattern retrieval, Sentry tracing, and a measured Tinker extraction fine-tune.
+> “Ramesh bhai ko 850 rupaye ka ration diya, Friday tak dega.”
 
-## What works now
+The app transcribes the audio, extracts the customer, amount, transaction type and due date, then safely adds the entry to that shopkeeper's private ledger.
 
-- `POST /api/note` accepts an audio upload or a development-only transcript.
-- The browser can record a voice note directly from the device microphone.
-- Audio is sent directly to ElevenLabs Scribe v2 and is not persisted by this app.
-- Gemma 3 produces schema-constrained JSON through Ollama.
-- A deterministic local parser keeps the demo usable when Ollama is unavailable and reports that fallback in the response.
-- Entries below `0.6` confidence, or with no amount, go to `pending_reviews` and never touch the ledger.
-- Customer names are fuzzy-matched, including common honorifics such as “bhai” and “ji”.
-- SQLite starts empty and records only notes entered by the shopkeeper.
-- Local accounts use PBKDF2 password hashing and server-side, expiring sessions; every ledger query is scoped to the signed-in owner.
-- `GET /api/brief` returns outstanding totals, repayment patterns, age, and Hinglish collection messages.
-- The single-page UI shows note processing, the ledger, and the collection brief.
-- Low-confidence notes appear in an owner-only correction queue; transaction history can be inspected and incorrect entries deleted.
-- Sentry spans record the model, system prompt, latency, token usage, and a `parse_failure` tag when configured. Parsed financial output is redacted by default.
-- Atlas Vector Search retrieves only explicitly synthetic repayment profiles; no real ledger row is uploaded.
-- A 10-step Tinker LoRA fine-tune on Qwen 3.5 4B improved held-out synthetic transaction-direction extraction from 80% to 100% (40 examples). Amount, customer, and valid-JSON accuracy remained 100%.
+![Khata Ledger voice entry interface](results/khata-voice-entry.png)
 
-## Run locally
+## Why this exists
 
-Prerequisites: Python 3.11+, [uv](https://docs.astral.sh/uv/), and Ollama.
+Many neighbourhood shopkeepers still manage credit in notebooks, memory, or scattered chat messages. Traditional accounting products often expect careful typing, formal bookkeeping language, and constant connectivity.
+
+Khata Ledger is designed around the way a shopkeeper already works:
+
+- speak naturally in Hindi, Hinglish, Punjabi-accented English, or everyday shop language;
+- review uncertain entries instead of silently saving bad financial data;
+- keep customer balances separated by shop account;
+- see exactly who owes money and when a reminder is actually due;
+- retain the real financial ledger in a local SQLite database.
+
+## Product highlights
+
+| Capability | What it does |
+| --- | --- |
+| Voice-first entry | Records directly from the browser with a live, real-volume waveform and recording timer. |
+| Dialect-aware transcription | Uses ElevenLabs Scribe v2 for speech-to-text. Uploaded audio is processed temporarily and is not saved by this application. |
+| Local AI extraction | Gemma 3 runs through Ollama and converts the transcript into validated ledger fields. |
+| Safe review gate | Missing amounts and extraction confidence below `0.6` are sent to a correction queue, never directly to the ledger. |
+| Duplicate protection | Idempotency keys prevent repeated taps or retried requests from creating duplicate transactions. |
+| Private shop accounts | Local authentication, expiring server sessions, and owner-scoped queries isolate each shop's records. |
+| Useful reminders | Customers appear for follow-up only when the due date arrives or credit has remained open for several days. |
+| Complete message context | Reminder messages include the current balance and dated account history, ready to copy or share. |
+| Searchable passbook | Search transactions by customer, filter credit versus payments, and remove incorrect entries. |
+| Observable AI pipeline | Optional Sentry spans show request and model latency while financial output stays redacted by default. |
+| Privacy-safe retrieval | MongoDB Atlas Vector Search operates only on explicitly synthetic repayment profiles. |
+
+## How it works
+
+```mermaid
+flowchart LR
+    A[Shopkeeper speaks] --> B[Browser recorder]
+    B -->|temporary audio| C[ElevenLabs Scribe]
+    C -->|transcript| D[FastAPI]
+    D --> E[Gemma 3 via local Ollama]
+    E --> F{Valid and confident?}
+    F -->|Yes| G[(Private SQLite ledger)]
+    F -->|No| H[Owner review queue]
+    H -->|Corrected| G
+    G --> I[Balances, passbook and reminders]
+    D -. redacted telemetry .-> J[Sentry]
+    K[(Synthetic Atlas profiles)] -. pattern search only .-> D
+```
+
+### Privacy boundary
+
+| Data | Location |
+| --- | --- |
+| Uploaded voice note | Sent to ElevenLabs for transcription; not persisted by Khata Ledger |
+| Transcript during extraction | Sent to the shopkeeper's local Ollama server |
+| Accounts, customers and rupee-level records | Local SQLite database configured by `KHATA_DB_PATH` |
+| Passwords | Salted PBKDF2-SHA256 hashes; plaintext passwords are never stored |
+| Browser session | Random server-side session with an `HttpOnly`, `SameSite=Strict` cookie |
+| Sentry telemetry | Optional; parsed financial output is redacted unless synthetic tracing is explicitly enabled |
+| MongoDB Atlas | Synthetic profiles only—never real customers or ledger rows |
+
+## Quick start
+
+### Requirements
+
+- macOS, Linux, or Windows
+- Python 3.11 or newer
+- [uv](https://docs.astral.sh/uv/)
+- [Ollama](https://ollama.com/)
+- an ElevenLabs API key for real voice transcription
+
+Gemma 3 4B requires an approximately 3.3 GB model download. Keep additional free disk space available for the Python environment and runtime files.
+
+### 1. Install dependencies
+
+```bash
+git clone https://github.com/amritkang165/khata-ledger.git
+cd khata-ledger
+uv sync --extra dev
+```
+
+### 2. Configure the application
 
 ```bash
 cp .env.example .env
+```
+
+Add your ElevenLabs key to `.env`:
+
+```dotenv
+ELEVENLABS_API_KEY=your_key_here
+```
+
+Do not commit `.env`; it is intentionally ignored by Git.
+
+### 3. Start Ollama and download Gemma
+
+On macOS, open the Ollama application:
+
+```bash
+open -a Ollama
 ollama pull gemma3:4b
-uv sync --extra dev --extra experiment
+```
+
+On other systems, start the server directly if it is not already running:
+
+```bash
+ollama serve
+```
+
+Verify the model in another terminal:
+
+```bash
+ollama run gemma3:4b "Reply with only: KHATA READY"
+```
+
+### 4. Run Khata Ledger
+
+```bash
 ./start.sh
 ```
 
-Open <http://localhost:8000>. Environment variables are read from the shell; either export `.env` values or use your preferred dotenv runner. Without an ElevenLabs key, the manual transcript box still exercises extraction, matching, review gating, SQLite, and the brief.
+Open [http://localhost:8000](http://localhost:8000), create a shop account, allow microphone access, and record the first entry.
 
-Create the first account in the browser. On an installation upgraded from the earlier single-user build, that first account safely claims the existing local ledger entries. Later accounts always start with an empty, isolated ledger.
+If ElevenLabs is not configured, open **Use an audio file or type instead** and use the manual transcript box to test extraction, review gating, matching, storage, and reminders.
 
-Try:
+## Example notes
 
 ```text
 Ramesh bhai ko 850 rupaye ka ration diya, Friday tak dega
+Sunita owes 420 rupees for school books, payment by Monday
+Vanshika ne 500 rupaye wapas de diye
+Deepak ko aaj 333 rupaye ka school samaan diya
 ```
 
-Tests:
+Credit given increases the customer's outstanding balance. Payment received reduces it.
+
+## Screenshots and evidence
+
+### Voice-first shop interface
+
+The main experience keeps the microphone central, gives immediate recording feedback, and places discard and submit controls beside the note.
+
+![Voice-first Khata Ledger interface](results/khata-voice-entry.png)
+
+### Sentry tracing
+
+FastAPI requests, local model extraction, and downstream HTTP work appear as connected spans. Financial output remains redacted by default.
+
+![Sentry trace for ledger extraction](results/sentry-review-trace.png)
+
+### MongoDB Atlas Vector Search
+
+Atlas retrieves similar repayment patterns from a synthetic-only dataset. Real customer records never leave SQLite for this feature.
+
+![Synthetic Atlas Vector Search results](results/atlas-vector-search.png)
+
+### Tinker evaluation
+
+The measured synthetic extraction evaluation improved transaction-direction accuracy from 80% to 100% on a fixed 40-example held-out split.
+
+![Tinker extraction evaluation before and after fine-tuning](results/tinker-before-after.png)
+
+This result measures transcript-to-ledger extraction, not speech-recognition word error rate.
+
+## Configuration
+
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `ELEVENLABS_API_KEY` | empty | Enables real audio transcription |
+| `ELEVENLABS_MODEL_ID` | `scribe_v2` | ElevenLabs transcription model |
+| `OLLAMA_URL` | `http://127.0.0.1:11434` | Local Ollama server |
+| `OLLAMA_MODEL` | `gemma3:4b` | Local extraction model |
+| `OLLAMA_ENABLED` | `true` | Disables local-model calls when set to `false` |
+| `KHATA_DB_PATH` | `data/khata.db` | SQLite ledger location |
+| `SESSION_COOKIE_SECURE` | `false` | Set to `true` behind production HTTPS |
+| `SENTRY_DSN` | empty | Enables optional Sentry monitoring |
+| `ALLOW_SYNTHETIC_TRACE_DATA` | `false` | Allows richer traces only for synthetic demonstrations |
+| `MONGODB_URI` | empty | Enables synthetic Atlas pattern retrieval |
+| `ATLAS_DATABASE` | `khata_patterns` | Atlas database name |
+| `ATLAS_COLLECTION` | `synthetic_customer_patterns` | Atlas synthetic collection |
+| `ATLAS_VECTOR_INDEX` | `pattern_vector_index` | Atlas vector index |
+
+## API overview
+
+All ledger endpoints are scoped to the authenticated shop owner.
+
+| Method | Endpoint | Purpose |
+| --- | --- | --- |
+| `POST` | `/api/auth/register` | Create a shop account |
+| `POST` | `/api/auth/login` | Start an authenticated session |
+| `POST` | `/api/auth/logout` | End the current session |
+| `GET` | `/api/auth/me` | Return the signed-in account |
+| `POST` | `/api/note` | Process audio or a manual transcript; accepts `Idempotency-Key` |
+| `GET` | `/api/ledger` | Return current customer balances |
+| `GET` | `/api/transactions` | Return the owner-scoped passbook |
+| `DELETE` | `/api/transactions/{id}` | Remove an incorrect transaction |
+| `GET` | `/api/reviews` | Return uncertain notes awaiting correction |
+| `POST` | `/api/reviews/{id}/approve` | Save a corrected review |
+| `DELETE` | `/api/reviews/{id}` | Discard a review |
+| `GET` | `/api/brief` | Return due reminders and repayment context |
+| `GET` | `/api/health` | Report service and model configuration |
+
+Interactive OpenAPI documentation is available at [http://localhost:8000/docs](http://localhost:8000/docs) while the server is running.
+
+## Project structure
+
+```text
+app/
+├── brief/          reminder eligibility and repayment summaries
+├── db/             SQLite ledger and synthetic Atlas integration
+├── pipeline/       transcription, extraction and customer matching
+├── ui/             responsive HTML, CSS and JavaScript interface
+├── auth.py         password hashing and session security
+├── main.py         FastAPI routes and orchestration
+└── schemas.py      validated API and extraction models
+
+scripts/
+├── finetune/       Tinker dataset, training and evaluation scripts
+└── seed/           reproducible synthetic data and Atlas verification
+
+tests/              API, extraction, matching, brief and Atlas tests
+results/            evaluation charts and integration evidence
+```
+
+## Tests
 
 ```bash
 uv run pytest -q
 ```
 
-Docker is also available. Ollama stays on the host, outside the Compose stack:
+The test suite covers authentication isolation, the ledger API, extraction, customer matching, review gating, reminders, Atlas behavior, and fine-tuning data preparation.
+
+## Synthetic Atlas demo
+
+Real ledger rows must never be uploaded to Atlas. To seed and verify the isolated synthetic dataset:
+
+```bash
+.venv/bin/python -m scripts.seed.seed_atlas
+.venv/bin/python -m scripts.seed.verify_atlas
+```
+
+Expected verification ends with:
+
+```text
+Verified synthetic-only Atlas Vector Search
+```
+
+## Tinker experiment
+
+The live Tinker catalog used during development did not expose a Whisper/audio fine-tuning path, so the experiment targets transcript-to-ledger JSON extraction instead.
+
+```bash
+uv sync --extra experiment
+python scripts/seed/generate_transcripts.py
+python scripts/finetune/prepare_data.py
+```
+
+The reproducible dataset contains 200 synthetic notes: 160 training examples and a fixed 40-example test split. Metrics and predictions are stored under `results/`.
+
+## Docker and Render
+
+Run the application with Docker Compose:
 
 ```bash
 docker compose up --build
 ```
 
-## Deploy the synthetic demo on Render
+Ollama remains on the host machine. `render.yaml` defines a Docker web service with a persistent disk mounted at `/var/data`; secrets must be entered through the Render dashboard.
 
-`render.yaml` defines a paid 512 MB Docker web service in Singapore with a 1 GB persistent disk mounted at `/var/data`. Render's filesystem is otherwise ephemeral, so `KHATA_DB_PATH` points to that disk. Secret values are intentionally omitted and must be entered in Render's dashboard.
+The hosted configuration uses `OLLAMA_ENABLED=false` because Render cannot access the shopkeeper's local Ollama process. Use only synthetic notes on a public demonstration deployment. The full local Gemma flow is the intended privacy-preserving configuration.
 
-The public hosted demo sets `OLLAMA_ENABLED=false` and uses the deterministic extraction fallback because it cannot reach the shopkeeper's local Ollama process. The complete Gemma/Ollama flow remains a local-only privacy feature. Use only synthetic demonstration notes on the public deployment.
+## Security notes
 
-The Docker build context excludes `.env`, local SQLite data, voice notes, results, tests, and the virtual environment.
+- Never commit `.env`, API keys, `data/khata.db`, or real voice recordings.
+- Use `SESSION_COOKIE_SECURE=true` when serving behind HTTPS.
+- Back up the SQLite database if the ledger becomes operationally important.
+- Keep Atlas limited to synthetic data unless the privacy architecture is intentionally redesigned.
+- This project is an early product build, not audited financial software.
 
-## Architecture and privacy boundary
+## Current limitations
 
-```text
-voice note ──temporary upload──> ElevenLabs Scribe ──transcript──┐
-                                                               v
-browser <──API response── FastAPI ──> local Gemma/Ollama ──> SQLite
-                              └────> Sentry trace (no PII by default)
-```
+- Speech word-error rate has not yet been measured on a consented real-world dialect dataset.
+- Due phrases support ISO dates, today/tomorrow, and weekday wording; richer natural-language calendar parsing is still limited.
+- The local-first deployment currently assumes one running application instance sharing its configured SQLite file.
+- Public deployment requires careful secrets, HTTPS, persistent storage, backups, and operational monitoring.
 
-The financial system of record is SQLite. The app does not store uploaded audio. Manual transcript input exists only for development and judging resilience. Sentry is disabled unless `SENTRY_DSN` is set, and financial output is redacted from traces by default. `ALLOW_SYNTHETIC_TRACE_DATA=true` may be used only with the repository's synthetic demo notes to capture judging evidence. Atlas contains synthetic pattern documents only—never the real ledger or customer PII.
+## License and authorship
 
-## Why authentication is local by design
+Built by **Amrit Kang**.
 
-Khata Ledger deliberately keeps authentication beside the ledger instead of making a hosted identity service such as Supabase or Firebase a requirement. The person this is built for may have unreliable connectivity, and signing in should never become the reason he cannot check who owes him money.
-
-Accounts, sessions, and financial records live in the same local SQLite database under the shopkeeper's control. Passwords are protected with salted PBKDF2-SHA256 hashes, raw session tokens are never stored, sessions expire on the server, and every ledger query is scoped to the authenticated account. An `HttpOnly`, `SameSite=Strict` cookie connects the browser to that session.
-
-This choice gives the product four valuable properties:
-
-- **Offline resilience:** returning users can access the locally running product without depending on a cloud authentication provider.
-- **One privacy boundary:** identity and rupee-level records do not need to be copied into separate cloud systems.
-- **Portable ownership:** the database can be backed up, moved, or self-hosted without exporting data from a vendor.
-- **Low operating cost:** a small shop does not acquire another metered service just to protect its own ledger.
-
-Hosted authentication would be a strong fit for a conventional internet-first SaaS. For this local-first product, authentication is part of the privacy architecture rather than an external prerequisite.
-
-## API
-
-- `POST /api/auth/register`, `POST /api/auth/login`, `POST /api/auth/logout`, `GET /api/auth/me`
-- `POST /api/note`: multipart form with either `audio` or `transcript`
-- `GET /api/ledger`: current per-customer balances
-- `GET /api/transactions`, `DELETE /api/transactions/{id}`: owner-scoped history and correction
-- `GET /api/reviews`, `POST /api/reviews/{id}/approve`, `DELETE /api/reviews/{id}`
-- `GET /api/brief`: weekly collection brief
-- `GET /api/health`: service and model configuration
-
-## Training and evaluation assets
-
-Synthetic data is never inserted into the real ledger. Generate the reproducible 200-example extraction corpus with:
-
-```bash
-python scripts/seed/generate_transcripts.py
-```
-
-Real voice notes belong in `data/voice_notes/` and remain gitignored. `TODO(ASSET)`: add the owner's 20 consented recordings and a manifest before Tinker evaluation.
-
-## Built with Copilot
-
-Placeholder for the two required build-session screenshots and an honest assessment. Do not fabricate this evidence; add it from the actual Copilot sessions before submission.
-
-## Tinker evaluation
-
-Tinker's live model catalog did not expose Whisper/audio fine-tuning, so the measured Tinker experiment fine-tunes transcript-to-ledger JSON extraction instead. The deterministic 80/20 split contains 160 synthetic training transcripts and 40 held-out synthetic transcripts. Results are stored in `results/tinker_extraction_metrics.json`; the comparison chart is `results/tinker-before-after.png`.
-
-These are text-extraction exact-match results, not speech WER. No acoustic improvement is claimed.
-
-## Current gaps
-
-- Measured speech WER is not available because Tinker did not expose a trainable Whisper/audio model. Do not present extraction accuracy as WER.
-- Atlas retrieval remains isolated to eight explicitly synthetic profiles. The SQLite ledger and real customer data are never synchronized to Atlas.
-- Collection-message generation currently uses a safe local template; Gemma-generated tone will follow after evaluation.
-- Due phrases are retained as spoken; calendar normalization and true “days overdue” are still pending.
-- ElevenLabs, Ollama, Sentry, Tinker, and Atlas were smoke-tested locally; deployment still requires environment-specific credentials and services.
+Copyright © 2026 Amrit Kang. All rights reserved.
