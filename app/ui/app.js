@@ -27,6 +27,10 @@ async function showApp(user) {
   document.querySelector('#shop-name').textContent = user.shop_name;
   document.querySelector('#shop-location').textContent = user.city ? `${user.city} · Private shop ledger` : 'Private shop ledger';
   document.querySelector('#account-language').textContent = user.preferred_language;
+  document.querySelector('#owner-avatar').textContent = user.display_name.trim().charAt(0).toUpperCase();
+  document.querySelector('#today-date').textContent = new Intl.DateTimeFormat('en-IN', {
+    weekday: 'long', day: 'numeric', month: 'long'
+  }).format(new Date());
   authView.classList.add('hidden');
   appView.classList.remove('hidden');
   await refresh();
@@ -38,19 +42,19 @@ async function refresh() {
     api('/api/transactions').then(r => r.json()), api('/api/reviews').then(r => r.json())
   ]);
   document.querySelector('#ledger').innerHTML = ledgerData.customers.length
-    ? ledgerData.customers.map(row => `<tr><td>${escapeHtml(row.name)}</td><td class="money">${rupees.format(row.outstanding_rupees)}</td><td>${row.last_activity || '—'}</td><td>${row.transaction_count}</td></tr>`).join('')
-    : '<tr><td colspan="4">Your ledger is empty. Add the first voice note above.</td></tr>';
+    ? ledgerData.customers.map(row => `<tr><td><div class="customer-cell"><span class="customer-avatar">${escapeHtml(row.name.charAt(0).toUpperCase())}</span><strong>${escapeHtml(row.name)}</strong></div></td><td><span class="balance ${row.outstanding_rupees > 0 ? 'open' : 'settled'}">${rupees.format(row.outstanding_rupees)}</span></td><td>${row.last_activity || '—'}</td><td>${row.transaction_count}</td></tr>`).join('')
+    : '<tr class="empty-row"><td colspan="4"><b>No customer accounts yet</b><span>Your first voice note will create one automatically.</span></td></tr>';
   document.querySelector('#brief-total').textContent = `${rupees.format(brief.total_outstanding)} to collect`;
   document.querySelector('#stat-outstanding').textContent = rupees.format(brief.total_outstanding);
   document.querySelector('#stat-customers').textContent = ledgerData.customers.length;
   document.querySelector('#stat-entries').textContent = history.transactions.length;
   document.querySelector('#stat-reviews').textContent = reviewData.reviews.length;
   document.querySelector('#brief-list').innerHTML = brief.customers.length
-    ? brief.customers.map(item => `<article class="brief-item"><h3>${escapeHtml(item.customer_name)} · ${rupees.format(item.outstanding_rupees)}</h3><p>${item.days_open} days open. ${escapeHtml(item.pattern_note)}</p><p class="message">“${escapeHtml(item.collection_message)}”</p></article>`).join('')
-    : '<p>No outstanding credit yet.</p>';
+    ? brief.customers.map((item, index) => `<article class="brief-item"><span class="priority">${index + 1}</span><div><h3>${escapeHtml(item.customer_name)}</h3><b>${rupees.format(item.outstanding_rupees)}</b><p>${item.days_open} days open · ${escapeHtml(item.pattern_note)}</p><p class="message">“${escapeHtml(item.collection_message)}”</p></div></article>`).join('')
+    : '<div class="empty-state"><span>✓</span><b>No collections due</b><p>Outstanding customer balances will appear here.</p></div>';
   document.querySelector('#transactions').innerHTML = history.transactions.length
-    ? history.transactions.map(item => `<tr><td>${escapeHtml(item.happened_on)}</td><td>${escapeHtml(item.customer_name)}</td><td>${item.transaction_type === 'credit_given' ? 'Credit given' : 'Payment received'}</td><td class="money">${item.transaction_type === 'credit_paid' ? '−' : ''}${rupees.format(item.amount_rupees)}</td><td>${escapeHtml(item.due_day || '—')}</td><td><button class="danger small delete-transaction" data-id="${item.id}">Delete</button></td></tr>`).join('')
-    : '<tr><td colspan="6">No transactions yet.</td></tr>';
+    ? history.transactions.map(item => `<tr><td>${escapeHtml(item.happened_on)}</td><td><strong>${escapeHtml(item.customer_name)}</strong></td><td><span class="entry-type ${item.transaction_type}">${item.transaction_type === 'credit_given' ? 'Credit given' : 'Payment received'}</span></td><td class="money">${item.transaction_type === 'credit_paid' ? '−' : ''}${rupees.format(item.amount_rupees)}</td><td>${escapeHtml(item.due_day || '—')}</td><td><button class="danger small delete-transaction" data-id="${item.id}">Delete</button></td></tr>`).join('')
+    : '<tr class="empty-row"><td colspan="6"><b>No transactions recorded</b><span>New entries will build the shop passbook.</span></td></tr>';
   renderReviews(reviewData.reviews);
 }
 
@@ -81,7 +85,8 @@ document.querySelector('#record').addEventListener('click', async event => {
   const status = document.querySelector('#record-status');
   if (mediaRecorder?.state === 'recording') {
     mediaRecorder.stop();
-    event.currentTarget.innerHTML = '<span>🎙</span><b>Start recording</b>';
+    event.currentTarget.querySelector('.mic').textContent = '🎙';
+    event.currentTarget.querySelector('b').textContent = 'Start voice note';
     return;
   }
   try {
@@ -95,12 +100,23 @@ document.querySelector('#record').addEventListener('click', async event => {
       status.textContent = '✓ Recording ready';
     });
     mediaRecorder.start();
-    event.currentTarget.innerHTML = '<span>■</span><b>Stop recording</b>';
+    event.currentTarget.querySelector('.mic').textContent = '■';
+    event.currentTarget.querySelector('b').textContent = 'Stop recording';
     status.textContent = 'Recording…';
   } catch (_error) {
     status.textContent = 'Microphone permission was not granted.';
   }
 });
+
+function openAuthPanel(panelId) {
+  for (const panel of document.querySelectorAll('.auth-panel')) panel.classList.toggle('hidden', panel.id !== panelId);
+  for (const tab of document.querySelectorAll('.auth-tab')) tab.classList.toggle('active', tab.dataset.authPanel === panelId);
+  document.querySelector('#auth-error').classList.add('hidden');
+}
+
+for (const trigger of document.querySelectorAll('[data-auth-panel]')) {
+  trigger.addEventListener('click', () => openAuthPanel(trigger.dataset.authPanel));
+}
 
 document.querySelector('#transactions').addEventListener('click', async event => {
   const button = event.target.closest('.delete-transaction');
