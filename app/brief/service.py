@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections import defaultdict, deque
-from datetime import date
+from datetime import date, timedelta
 
 from app.db.sqlite import Ledger
 
@@ -12,13 +12,19 @@ def build_weekly_brief(ledger: Ledger, user_id: int) -> dict:
         histories[transaction["customer_name"]].append(transaction)
 
     entries = []
+    total_outstanding = 0
     for row in ledger.ledger_rows(user_id):
         if row["outstanding_rupees"] <= 0:
             continue
+        total_outstanding += row["outstanding_rupees"]
         transactions = histories[row["name"]]
         lags = _repayment_lags(transactions)
         oldest_open = _oldest_open_credit(transactions)
-        days_open = (date.today() - date.fromisoformat(oldest_open)).days if oldest_open else 0
+        opened_on = date.fromisoformat(oldest_open["happened_on"]) if oldest_open else date.today()
+        days_open = (date.today() - opened_on).days
+        due_on = _due_date(oldest_open.get("due_day"), opened_on) if oldest_open else None
+        if days_open < 3 and not (due_on and due_on <= date.today()):
+            continue
         avg = round(sum(lags) / len(lags), 1) if lags else None
         context = _frequent_context(transactions)
         pattern = (
@@ -29,15 +35,26 @@ def build_weekly_brief(ledger: Ledger, user_id: int) -> dict:
             "customer_name": row["name"],
             "outstanding_rupees": row["outstanding_rupees"],
             "days_open": days_open,
+            "due_on": due_on.isoformat() if due_on else None,
             "average_days_to_repay": avg,
             "pattern_note": pattern,
-            "collection_message": (
-                f"Namaste {row['name']} ji, aapke ₹{row['outstanding_rupees']} pending hain. "
-                "Jab convenient ho payment kar dena, dhanyavaad."
-            ),
+            "history": [
+                {
+                    "happened_on": transaction["happened_on"],
+                    "amount_rupees": transaction["amount_rupees"],
+                    "transaction_type": transaction["transaction_type"],
+                    "context": transaction["context"],
+                }
+                for transaction in transactions
+            ],
         })
     entries.sort(key=lambda item: (item["days_open"], item["outstanding_rupees"]), reverse=True)
-    return {"generated_on": date.today().isoformat(), "total_outstanding": sum(x["outstanding_rupees"] for x in entries), "customers": entries}
+    return {
+        "generated_on": date.today().isoformat(),
+        "total_outstanding": total_outstanding,
+        "total_due": sum(x["outstanding_rupees"] for x in entries),
+        "customers": entries,
+    }
 
 
 def _repayment_lags(transactions: list[dict]) -> list[int]:
@@ -61,7 +78,7 @@ def _repayment_lags(transactions: list[dict]) -> list[int]:
     return lags
 
 
-def _oldest_open_credit(transactions: list[dict]) -> str | None:
+def _oldest_open_credit(transactions: list[dict]) -> dict | None:
     credits: deque[dict] = deque()
     for transaction in transactions:
         if transaction["transaction_type"] == "credit_given":
@@ -75,7 +92,32 @@ def _oldest_open_credit(transactions: list[dict]) -> str | None:
                 credit["remaining"] -= applied
                 if credit["remaining"] == 0:
                     credits.popleft()
-    return credits[0]["happened_on"] if credits else None
+    return credits[0] if credits else None
+
+
+def _due_date(value: str | None, opened_on: date) -> date | None:
+    if not value:
+        return None
+    normalized = value.strip().lower()
+    try:
+        return date.fromisoformat(normalized)
+    except ValueError:
+        pass
+    if normalized == "today":
+        return opened_on
+    if normalized == "tomorrow":
+        return opened_on + timedelta(days=1)
+    weekdays = {
+        "monday": 0, "tuesday": 1, "wednesday": 2, "thursday": 3,
+        "friday": 4, "saturday": 5, "sunday": 6,
+    }
+    weekday = next((number for name, number in weekdays.items() if name in normalized), None)
+    if weekday is None:
+        return None
+    days_ahead = (weekday - opened_on.weekday()) % 7
+    if "next" in normalized and days_ahead == 0:
+        days_ahead = 7
+    return opened_on + timedelta(days=days_ahead)
 
 
 def _frequent_context(transactions: list[dict]) -> str:
