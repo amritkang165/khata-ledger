@@ -55,7 +55,7 @@
         <p class="subtext">Continue managing today's credit and collections.</p>
         <form id="login-form">
           <label>Email address<input name="email" type="email" autocomplete="email" placeholder="owner@example.com" required></label>
-          <label>Password<input name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required></label>
+          <label>Password<div class="password-field"><input name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required><button type="button" class="password-toggle" aria-label="Show password" aria-pressed="false">Show</button></div></label>
           <button type="submit" class="primary">Sign in</button>
         </form>
         <p class="switch-copy">Setting up for the first time? <button type="button" class="text-action" data-auth-panel="register-panel">Create your shop ledger</button></p>
@@ -72,7 +72,7 @@
           <label>Town or city <span>Optional</span><input name="city" autocomplete="address-level2" placeholder="Jalandhar" maxlength="80"></label>
           <label>Working language<select name="preferred_language"><option>Hinglish</option><option>Hindi</option><option>English</option></select></label>
           <label class="full">Email address<input name="email" type="email" autocomplete="email" placeholder="owner@example.com" required></label>
-          <label class="full">Password<input name="password" type="password" autocomplete="new-password" placeholder="Minimum 8 characters" required minlength="8"></label>
+          <label class="full">Password<div class="password-field"><input name="password" type="password" autocomplete="new-password" placeholder="Minimum 8 characters" required minlength="8"><button type="button" class="password-toggle" aria-label="Show password" aria-pressed="false">Show</button></div></label>
           <button type="submit" class="primary full">Create shop ledger</button>
         </form>
         <p class="switch-copy">Already registered? <button type="button" class="text-action" data-auth-panel="login-panel">Sign in instead</button></p>

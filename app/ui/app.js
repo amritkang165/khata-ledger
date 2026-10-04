@@ -147,6 +147,17 @@ for (const trigger of document.querySelectorAll('[data-auth-panel]')) {
   trigger.addEventListener('click', () => openAuthPanel(trigger.dataset.authPanel));
 }
 
+for (const toggle of document.querySelectorAll('.password-toggle')) {
+  toggle.addEventListener('click', () => {
+    const input = toggle.closest('.password-field').querySelector('input');
+    const reveal = input.type === 'password';
+    input.type = reveal ? 'text' : 'password';
+    toggle.textContent = reveal ? 'Hide' : 'Show';
+    toggle.setAttribute('aria-label', `${reveal ? 'Hide' : 'Show'} password`);
+    toggle.setAttribute('aria-pressed', String(reveal));
+  });
+}
+
 document.querySelector('#transactions').addEventListener('click', async event => {
   const button = event.target.closest('.delete-transaction');
   if (!button || !confirm('Delete this transaction?')) return;

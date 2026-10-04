@@ -42,6 +42,9 @@ label { display: grid; gap: .4rem; color: #48483e; font-size: .8rem; font-weight
 label > span { color: #928d7d; font-size: .68rem; font-weight: 500; }
 input, select, textarea { width: 100%; padding: .8rem; border: 1px solid var(--line); border-radius: 4px; color: var(--ink); background: white; outline: none; }
 input:focus, select:focus, textarea:focus { border-color: var(--green); box-shadow: 0 0 0 2px #1d69561c; }
+.password-field { position: relative; display: flex; align-items: center; }
+.password-field input { padding-right: 4rem; }
+.password-field .password-toggle { position: absolute; right: .65rem; padding: .25rem; border: 0; color: var(--green); background: transparent; font-size: .72rem; font-weight: 800; }
 .shop-form { grid-template-columns: 1fr 1fr; }
 .shop-form .full { grid-column: 1 / -1; }
 .primary { padding: .85rem 1rem; border: 0; border-radius: 4px; color: white; background: var(--red); font-weight: 850; }
