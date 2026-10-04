@@ -1,0 +1,36 @@
+[project]
+name = "khata-ledger"
+version = "0.1.0"
+description = "Voice-first, local-first credit ledger for small shopkeepers"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115,<1",
+  "httpx>=0.27,<1",
+  "python-multipart>=0.0.20,<1",
+  "python-dotenv>=1.0,<2",
+  "pymongo>=4.10,<5",
+  "rapidfuzz>=3.10,<4",
+  "sentry-sdk[fastapi]>=2.19,<3",
+  "uvicorn[standard]>=0.32,<1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10"]
+experiment = [
+  "jiwer>=4,<5",
+  "matplotlib>=3.10,<4",
+  "sentence-transformers>=3.3,<6",
+  "tinker>=0.30.4,<1",
+  "tinker-cookbook>=0.5.7,<0.6",
+]
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

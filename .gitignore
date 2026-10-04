@@ -1,0 +1,11 @@
+.env
+.venv/
+dist/
+build/
+*.egg-info/
+__pycache__/
+.pytest_cache/
+*.pyc
+data/*.db
+data/voice_notes/*
+!data/voice_notes/.gitkeep
