@@ -1,0 +1,2402 @@
+[
+  {
+    "id": "synthetic-001",
+    "transcript": "Iqbal ka 20 payment aa gaya",
+    "ground_truth": {
+      "customer_name": "Iqbal",
+      "amount_rupees": 20,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-002",
+    "transcript": "aaj Amit ne diwali samaan liya 120 ka, payment koi date nahi",
+    "ground_truth": {
+      "customer_name": "Amit",
+      "amount_rupees": 120,
+      "due_day": null,
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-003",
+    "transcript": "aaj Iqbal ne dawai liya 1200 ka, payment jaldi",
+    "ground_truth": {
+      "customer_name": "Iqbal",
+      "amount_rupees": 1200,
+      "due_day": "jaldi",
+      "context": "dawai",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-004",
+    "transcript": "Kavita bhai ko 120 rupaye ka ration diya, jaldi",
+    "ground_truth": {
+      "customer_name": "Kavita",
+      "amount_rupees": 120,
+      "due_day": "jaldi",
+      "context": "ration",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-005",
+    "transcript": "Iqbal ne 250 rupaye jama kar diye",
+    "ground_truth": {
+      "customer_name": "Iqbal",
+      "amount_rupees": 250,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-006",
+    "transcript": "Iqbal ke khate mein 120 rupees, bachche ki fees, bola Friday",
+    "ground_truth": {
+      "customer_name": "Iqbal",
+      "amount_rupees": 120,
+      "due_day": "Friday",
+      "context": "bachche ki fees",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-007",
+    "transcript": "Deepak bhai ko 120 rupaye ka ration diya, month end",
+    "ground_truth": {
+      "customer_name": "Deepak",
+      "amount_rupees": 120,
+      "due_day": "month end",
+      "context": "ration",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-008",
+    "transcript": "Mohan ke khate mein 850 rupees, school books, bola koi date nahi",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 850,
+      "due_day": null,
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-009",
+    "transcript": "Mohan ne 5000 rupaye jama kar diye",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 5000,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-010",
+    "transcript": "Ramesh bhai ko 5000 rupaye ka shaadi diya, month end",
+    "ground_truth": {
+      "customer_name": "Ramesh",
+      "amount_rupees": 5000,
+      "due_day": "month end",
+      "context": "shaadi",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-011",
+    "transcript": "Iqbal ke khate mein 250 rupees, shaadi, bola is mahine ke end tak",
+    "ground_truth": {
+      "customer_name": "Iqbal",
+      "amount_rupees": 250,
+      "due_day": "is mahine ke end tak",
+      "context": "shaadi",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-012",
+    "transcript": "aaj Sunita ne school books liya 120 ka, payment jaldi",
+    "ground_truth": {
+      "customer_name": "Sunita",
+      "amount_rupees": 120,
+      "due_day": "jaldi",
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-013",
+    "transcript": "Mohan ne khate mein 1200 rupees chukaya",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 1200,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-014",
+    "transcript": "aaj Kavita ne ration liya 20 ka, payment jaldi",
+    "ground_truth": {
+      "customer_name": "Kavita",
+      "amount_rupees": 20,
+      "due_day": "jaldi",
+      "context": "ration",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-015",
+    "transcript": "aaj Rekha ne shaadi liya 5000 ka, payment month end",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 5000,
+      "due_day": "month end",
+      "context": "shaadi",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-016",
+    "transcript": "Mohan ke khate mein 2500 rupees, shaadi, bola month end",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 2500,
+      "due_day": "month end",
+      "context": "shaadi",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-017",
+    "transcript": "Shabnam ka 1200 payment aa gaya",
+    "ground_truth": {
+      "customer_name": "Shabnam",
+      "amount_rupees": 1200,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-018",
+    "transcript": "Deepak ke khate mein 120 rupees, school books, bola is mahine ke end tak",
+    "ground_truth": {
+      "customer_name": "Deepak",
+      "amount_rupees": 120,
+      "due_day": "is mahine ke end tak",
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-019",
+    "transcript": "aaj Ramesh ne diwali samaan liya 2500 ka, payment Friday",
+    "ground_truth": {
+      "customer_name": "Ramesh",
+      "amount_rupees": 2500,
+      "due_day": "Friday",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-020",
+    "transcript": "Deepak ke khate mein 2500 rupees, dawai, bola month end",
+    "ground_truth": {
+      "customer_name": "Deepak",
+      "amount_rupees": 2500,
+      "due_day": "month end",
+      "context": "dawai",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-021",
+    "transcript": "Amit ne khate mein 20 rupees chukaya",
+    "ground_truth": {
+      "customer_name": "Amit",
+      "amount_rupees": 20,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-022",
+    "transcript": "aaj Rekha ne shaadi liya 480 ka, payment koi date nahi",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 480,
+      "due_day": null,
+      "context": "shaadi",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-023",
+    "transcript": "Amit ke khate mein 250 rupees, school books, bola month end",
+    "ground_truth": {
+      "customer_name": "Amit",
+      "amount_rupees": 250,
+      "due_day": "month end",
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-024",
+    "transcript": "Mohan ke khate mein 120 rupees, diwali samaan, bola jaldi",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 120,
+      "due_day": "jaldi",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-025",
+    "transcript": "Shabnam ne 850 rupaye jama kar diye",
+    "ground_truth": {
+      "customer_name": "Shabnam",
+      "amount_rupees": 850,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-026",
+    "transcript": "Pooja bhai ko 50 rupaye ka dawai diya, koi date nahi",
+    "ground_truth": {
+      "customer_name": "Pooja",
+      "amount_rupees": 50,
+      "due_day": null,
+      "context": "dawai",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-027",
+    "transcript": "aaj Sunita ne ration liya 75 ka, payment koi date nahi",
+    "ground_truth": {
+      "customer_name": "Sunita",
+      "amount_rupees": 75,
+      "due_day": null,
+      "context": "ration",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-028",
+    "transcript": "aaj Pooja ne bachche ki fees liya 250 ka, payment Friday",
+    "ground_truth": {
+      "customer_name": "Pooja",
+      "amount_rupees": 250,
+      "due_day": "Friday",
+      "context": "bachche ki fees",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-029",
+    "transcript": "Ramesh ka 480 payment aa gaya",
+    "ground_truth": {
+      "customer_name": "Ramesh",
+      "amount_rupees": 480,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-030",
+    "transcript": "Deepak bhai ko 1200 rupaye ka diwali samaan diya, jaldi",
+    "ground_truth": {
+      "customer_name": "Deepak",
+      "amount_rupees": 1200,
+      "due_day": "jaldi",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-031",
+    "transcript": "Mohan ke khate mein 250 rupees, ration, bola is mahine ke end tak",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 250,
+      "due_day": "is mahine ke end tak",
+      "context": "ration",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-032",
+    "transcript": "aaj Ramesh ne ration liya 480 ka, payment koi date nahi",
+    "ground_truth": {
+      "customer_name": "Ramesh",
+      "amount_rupees": 480,
+      "due_day": null,
+      "context": "ration",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-033",
+    "transcript": "Rekha ne 5000 rupaye jama kar diye",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 5000,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-034",
+    "transcript": "Rekha bhai ko 75 rupaye ka dawai diya, Friday",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 75,
+      "due_day": "Friday",
+      "context": "dawai",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-035",
+    "transcript": "aaj Sunita ne school books liya 1200 ka, payment koi date nahi",
+    "ground_truth": {
+      "customer_name": "Sunita",
+      "amount_rupees": 1200,
+      "due_day": null,
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-036",
+    "transcript": "aaj Mohan ne school books liya 2500 ka, payment koi date nahi",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 2500,
+      "due_day": null,
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-037",
+    "transcript": "Mohan ne khate mein 120 rupees chukaya",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 120,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-038",
+    "transcript": "Shabnam ke khate mein 1200 rupees, school books, bola agle Monday",
+    "ground_truth": {
+      "customer_name": "Shabnam",
+      "amount_rupees": 1200,
+      "due_day": "agle Monday",
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-039",
+    "transcript": "Sunita bhai ko 1200 rupaye ka dawai diya, Friday",
+    "ground_truth": {
+      "customer_name": "Sunita",
+      "amount_rupees": 1200,
+      "due_day": "Friday",
+      "context": "dawai",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-040",
+    "transcript": "Pooja bhai ko 480 rupaye ka bachche ki fees diya, jaldi",
+    "ground_truth": {
+      "customer_name": "Pooja",
+      "amount_rupees": 480,
+      "due_day": "jaldi",
+      "context": "bachche ki fees",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-041",
+    "transcript": "Rekha ka 75 payment aa gaya",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 75,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-042",
+    "transcript": "Amit bhai ko 50 rupaye ka diwali samaan diya, month end",
+    "ground_truth": {
+      "customer_name": "Amit",
+      "amount_rupees": 50,
+      "due_day": "month end",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-043",
+    "transcript": "Deepak bhai ko 850 rupaye ka dawai diya, month end",
+    "ground_truth": {
+      "customer_name": "Deepak",
+      "amount_rupees": 850,
+      "due_day": "month end",
+      "context": "dawai",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-044",
+    "transcript": "Ramesh bhai ko 75 rupaye ka diwali samaan diya, Friday",
+    "ground_truth": {
+      "customer_name": "Ramesh",
+      "amount_rupees": 75,
+      "due_day": "Friday",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-045",
+    "transcript": "Kavita ne khate mein 480 rupees chukaya",
+    "ground_truth": {
+      "customer_name": "Kavita",
+      "amount_rupees": 480,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-046",
+    "transcript": "Rekha ke khate mein 250 rupees, diwali samaan, bola koi date nahi",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 250,
+      "due_day": null,
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-047",
+    "transcript": "aaj Shabnam ne school books liya 50 ka, payment is mahine ke end tak",
+    "ground_truth": {
+      "customer_name": "Shabnam",
+      "amount_rupees": 50,
+      "due_day": "is mahine ke end tak",
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-048",
+    "transcript": "aaj Amit ne school books liya 120 ka, payment agle Monday",
+    "ground_truth": {
+      "customer_name": "Amit",
+      "amount_rupees": 120,
+      "due_day": "agle Monday",
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-049",
+    "transcript": "Shabnam ne 250 rupaye jama kar diye",
+    "ground_truth": {
+      "customer_name": "Shabnam",
+      "amount_rupees": 250,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-050",
+    "transcript": "Sunita ke khate mein 1200 rupees, bachche ki fees, bola agle Monday",
+    "ground_truth": {
+      "customer_name": "Sunita",
+      "amount_rupees": 1200,
+      "due_day": "agle Monday",
+      "context": "bachche ki fees",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-051",
+    "transcript": "aaj Shabnam ne ration liya 120 ka, payment koi date nahi",
+    "ground_truth": {
+      "customer_name": "Shabnam",
+      "amount_rupees": 120,
+      "due_day": null,
+      "context": "ration",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-052",
+    "transcript": "aaj Shabnam ne ration liya 250 ka, payment koi date nahi",
+    "ground_truth": {
+      "customer_name": "Shabnam",
+      "amount_rupees": 250,
+      "due_day": null,
+      "context": "ration",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-053",
+    "transcript": "Mohan ka 850 payment aa gaya",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 850,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-054",
+    "transcript": "Sunita bhai ko 480 rupaye ka bachche ki fees diya, jaldi",
+    "ground_truth": {
+      "customer_name": "Sunita",
+      "amount_rupees": 480,
+      "due_day": "jaldi",
+      "context": "bachche ki fees",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-055",
+    "transcript": "Rekha bhai ko 1200 rupaye ka diwali samaan diya, jaldi",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 1200,
+      "due_day": "jaldi",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-056",
+    "transcript": "Rekha bhai ko 20 rupaye ka bachche ki fees diya, Friday",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 20,
+      "due_day": "Friday",
+      "context": "bachche ki fees",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-057",
+    "transcript": "Shabnam ne khate mein 50 rupees chukaya",
+    "ground_truth": {
+      "customer_name": "Shabnam",
+      "amount_rupees": 50,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-058",
+    "transcript": "aaj Amit ne school books liya 480 ka, payment agle Monday",
+    "ground_truth": {
+      "customer_name": "Amit",
+      "amount_rupees": 480,
+      "due_day": "agle Monday",
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-059",
+    "transcript": "Kavita ke khate mein 120 rupees, school books, bola jaldi",
+    "ground_truth": {
+      "customer_name": "Kavita",
+      "amount_rupees": 120,
+      "due_day": "jaldi",
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-060",
+    "transcript": "aaj Iqbal ne school books liya 120 ka, payment koi date nahi",
+    "ground_truth": {
+      "customer_name": "Iqbal",
+      "amount_rupees": 120,
+      "due_day": null,
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-061",
+    "transcript": "Mohan ne khate mein 2500 rupees chukaya",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 2500,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-062",
+    "transcript": "aaj Shabnam ne ration liya 75 ka, payment agle Monday",
+    "ground_truth": {
+      "customer_name": "Shabnam",
+      "amount_rupees": 75,
+      "due_day": "agle Monday",
+      "context": "ration",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-063",
+    "transcript": "Kavita bhai ko 2500 rupaye ka school books diya, is mahine ke end tak",
+    "ground_truth": {
+      "customer_name": "Kavita",
+      "amount_rupees": 2500,
+      "due_day": "is mahine ke end tak",
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-064",
+    "transcript": "aaj Rekha ne bachche ki fees liya 50 ka, payment agle Monday",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 50,
+      "due_day": "agle Monday",
+      "context": "bachche ki fees",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-065",
+    "transcript": "Deepak ka 1200 payment aa gaya",
+    "ground_truth": {
+      "customer_name": "Deepak",
+      "amount_rupees": 1200,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-066",
+    "transcript": "Shabnam ke khate mein 5000 rupees, ration, bola month end",
+    "ground_truth": {
+      "customer_name": "Shabnam",
+      "amount_rupees": 5000,
+      "due_day": "month end",
+      "context": "ration",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-067",
+    "transcript": "aaj Mohan ne ration liya 2500 ka, payment month end",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 2500,
+      "due_day": "month end",
+      "context": "ration",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-068",
+    "transcript": "Kavita ke khate mein 480 rupees, diwali samaan, bola Friday",
+    "ground_truth": {
+      "customer_name": "Kavita",
+      "amount_rupees": 480,
+      "due_day": "Friday",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-069",
+    "transcript": "Rekha ka 75 payment aa gaya",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 75,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-070",
+    "transcript": "aaj Kavita ne diwali samaan liya 1200 ka, payment jaldi",
+    "ground_truth": {
+      "customer_name": "Kavita",
+      "amount_rupees": 1200,
+      "due_day": "jaldi",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-071",
+    "transcript": "Kavita bhai ko 50 rupaye ka ration diya, is mahine ke end tak",
+    "ground_truth": {
+      "customer_name": "Kavita",
+      "amount_rupees": 50,
+      "due_day": "is mahine ke end tak",
+      "context": "ration",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-072",
+    "transcript": "Pooja bhai ko 20 rupaye ka school books diya, agle Monday",
+    "ground_truth": {
+      "customer_name": "Pooja",
+      "amount_rupees": 20,
+      "due_day": "agle Monday",
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-073",
+    "transcript": "Sunita ka 480 payment aa gaya",
+    "ground_truth": {
+      "customer_name": "Sunita",
+      "amount_rupees": 480,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-074",
+    "transcript": "aaj Mohan ne dawai liya 75 ka, payment agle Monday",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 75,
+      "due_day": "agle Monday",
+      "context": "dawai",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-075",
+    "transcript": "Rekha bhai ko 120 rupaye ka dawai diya, is mahine ke end tak",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 120,
+      "due_day": "is mahine ke end tak",
+      "context": "dawai",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-076",
+    "transcript": "aaj Amit ne ration liya 850 ka, payment month end",
+    "ground_truth": {
+      "customer_name": "Amit",
+      "amount_rupees": 850,
+      "due_day": "month end",
+      "context": "ration",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-077",
+    "transcript": "Rekha ne khate mein 250 rupees chukaya",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 250,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-078",
+    "transcript": "Iqbal ke khate mein 120 rupees, shaadi, bola month end",
+    "ground_truth": {
+      "customer_name": "Iqbal",
+      "amount_rupees": 120,
+      "due_day": "month end",
+      "context": "shaadi",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-079",
+    "transcript": "Iqbal bhai ko 20 rupaye ka bachche ki fees diya, month end",
+    "ground_truth": {
+      "customer_name": "Iqbal",
+      "amount_rupees": 20,
+      "due_day": "month end",
+      "context": "bachche ki fees",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-080",
+    "transcript": "aaj Deepak ne diwali samaan liya 20 ka, payment jaldi",
+    "ground_truth": {
+      "customer_name": "Deepak",
+      "amount_rupees": 20,
+      "due_day": "jaldi",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-081",
+    "transcript": "Mohan ka 1200 payment aa gaya",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 1200,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-082",
+    "transcript": "Mohan bhai ko 2500 rupaye ka ration diya, is mahine ke end tak",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 2500,
+      "due_day": "is mahine ke end tak",
+      "context": "ration",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-083",
+    "transcript": "Kavita bhai ko 480 rupaye ka dawai diya, Friday",
+    "ground_truth": {
+      "customer_name": "Kavita",
+      "amount_rupees": 480,
+      "due_day": "Friday",
+      "context": "dawai",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-084",
+    "transcript": "aaj Sunita ne dawai liya 1200 ka, payment agle Monday",
+    "ground_truth": {
+      "customer_name": "Sunita",
+      "amount_rupees": 1200,
+      "due_day": "agle Monday",
+      "context": "dawai",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-085",
+    "transcript": "Amit ka 5000 payment aa gaya",
+    "ground_truth": {
+      "customer_name": "Amit",
+      "amount_rupees": 5000,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-086",
+    "transcript": "Shabnam bhai ko 2500 rupaye ka dawai diya, month end",
+    "ground_truth": {
+      "customer_name": "Shabnam",
+      "amount_rupees": 2500,
+      "due_day": "month end",
+      "context": "dawai",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-087",
+    "transcript": "aaj Rekha ne shaadi liya 5000 ka, payment month end",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 5000,
+      "due_day": "month end",
+      "context": "shaadi",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-088",
+    "transcript": "Sunita bhai ko 75 rupaye ka ration diya, Friday",
+    "ground_truth": {
+      "customer_name": "Sunita",
+      "amount_rupees": 75,
+      "due_day": "Friday",
+      "context": "ration",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-089",
+    "transcript": "Iqbal ne 480 rupaye jama kar diye",
+    "ground_truth": {
+      "customer_name": "Iqbal",
+      "amount_rupees": 480,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-090",
+    "transcript": "Pooja ke khate mein 480 rupees, bachche ki fees, bola agle Monday",
+    "ground_truth": {
+      "customer_name": "Pooja",
+      "amount_rupees": 480,
+      "due_day": "agle Monday",
+      "context": "bachche ki fees",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-091",
+    "transcript": "aaj Shabnam ne diwali samaan liya 480 ka, payment jaldi",
+    "ground_truth": {
+      "customer_name": "Shabnam",
+      "amount_rupees": 480,
+      "due_day": "jaldi",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-092",
+    "transcript": "aaj Mohan ne dawai liya 850 ka, payment Friday",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 850,
+      "due_day": "Friday",
+      "context": "dawai",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-093",
+    "transcript": "Kavita ne 250 rupaye jama kar diye",
+    "ground_truth": {
+      "customer_name": "Kavita",
+      "amount_rupees": 250,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-094",
+    "transcript": "Iqbal ke khate mein 2500 rupees, dawai, bola agle Monday",
+    "ground_truth": {
+      "customer_name": "Iqbal",
+      "amount_rupees": 2500,
+      "due_day": "agle Monday",
+      "context": "dawai",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-095",
+    "transcript": "Rekha bhai ko 120 rupaye ka shaadi diya, is mahine ke end tak",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 120,
+      "due_day": "is mahine ke end tak",
+      "context": "shaadi",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-096",
+    "transcript": "Mohan bhai ko 480 rupaye ka shaadi diya, agle Monday",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 480,
+      "due_day": "agle Monday",
+      "context": "shaadi",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-097",
+    "transcript": "Shabnam ka 850 payment aa gaya",
+    "ground_truth": {
+      "customer_name": "Shabnam",
+      "amount_rupees": 850,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-098",
+    "transcript": "Rekha bhai ko 20 rupaye ka bachche ki fees diya, is mahine ke end tak",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 20,
+      "due_day": "is mahine ke end tak",
+      "context": "bachche ki fees",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-099",
+    "transcript": "Ramesh bhai ko 75 rupaye ka shaadi diya, jaldi",
+    "ground_truth": {
+      "customer_name": "Ramesh",
+      "amount_rupees": 75,
+      "due_day": "jaldi",
+      "context": "shaadi",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-100",
+    "transcript": "Amit bhai ko 5000 rupaye ka shaadi diya, agle Monday",
+    "ground_truth": {
+      "customer_name": "Amit",
+      "amount_rupees": 5000,
+      "due_day": "agle Monday",
+      "context": "shaadi",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-101",
+    "transcript": "Rekha ka 850 payment aa gaya",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 850,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-102",
+    "transcript": "Kavita ke khate mein 250 rupees, school books, bola is mahine ke end tak",
+    "ground_truth": {
+      "customer_name": "Kavita",
+      "amount_rupees": 250,
+      "due_day": "is mahine ke end tak",
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-103",
+    "transcript": "aaj Pooja ne diwali samaan liya 75 ka, payment month end",
+    "ground_truth": {
+      "customer_name": "Pooja",
+      "amount_rupees": 75,
+      "due_day": "month end",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-104",
+    "transcript": "Kavita bhai ko 50 rupaye ka shaadi diya, agle Monday",
+    "ground_truth": {
+      "customer_name": "Kavita",
+      "amount_rupees": 50,
+      "due_day": "agle Monday",
+      "context": "shaadi",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-105",
+    "transcript": "Rekha ka 2500 payment aa gaya",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 2500,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-106",
+    "transcript": "aaj Deepak ne diwali samaan liya 120 ka, payment is mahine ke end tak",
+    "ground_truth": {
+      "customer_name": "Deepak",
+      "amount_rupees": 120,
+      "due_day": "is mahine ke end tak",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-107",
+    "transcript": "Deepak ke khate mein 480 rupees, bachche ki fees, bola month end",
+    "ground_truth": {
+      "customer_name": "Deepak",
+      "amount_rupees": 480,
+      "due_day": "month end",
+      "context": "bachche ki fees",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-108",
+    "transcript": "Rekha bhai ko 2500 rupaye ka ration diya, agle Monday",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 2500,
+      "due_day": "agle Monday",
+      "context": "ration",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-109",
+    "transcript": "Rekha ka 480 payment aa gaya",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 480,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-110",
+    "transcript": "Sunita ke khate mein 250 rupees, school books, bola is mahine ke end tak",
+    "ground_truth": {
+      "customer_name": "Sunita",
+      "amount_rupees": 250,
+      "due_day": "is mahine ke end tak",
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-111",
+    "transcript": "aaj Rekha ne bachche ki fees liya 50 ka, payment koi date nahi",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 50,
+      "due_day": null,
+      "context": "bachche ki fees",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-112",
+    "transcript": "Mohan ke khate mein 5000 rupees, dawai, bola agle Monday",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 5000,
+      "due_day": "agle Monday",
+      "context": "dawai",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-113",
+    "transcript": "Rekha ne khate mein 50 rupees chukaya",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 50,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-114",
+    "transcript": "Sunita bhai ko 2500 rupaye ka shaadi diya, agle Monday",
+    "ground_truth": {
+      "customer_name": "Sunita",
+      "amount_rupees": 2500,
+      "due_day": "agle Monday",
+      "context": "shaadi",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-115",
+    "transcript": "Deepak bhai ko 120 rupaye ka diwali samaan diya, agle Monday",
+    "ground_truth": {
+      "customer_name": "Deepak",
+      "amount_rupees": 120,
+      "due_day": "agle Monday",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-116",
+    "transcript": "Amit ke khate mein 120 rupees, shaadi, bola agle Monday",
+    "ground_truth": {
+      "customer_name": "Amit",
+      "amount_rupees": 120,
+      "due_day": "agle Monday",
+      "context": "shaadi",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-117",
+    "transcript": "Ramesh ne 1200 rupaye jama kar diye",
+    "ground_truth": {
+      "customer_name": "Ramesh",
+      "amount_rupees": 1200,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-118",
+    "transcript": "Kavita ke khate mein 20 rupees, ration, bola is mahine ke end tak",
+    "ground_truth": {
+      "customer_name": "Kavita",
+      "amount_rupees": 20,
+      "due_day": "is mahine ke end tak",
+      "context": "ration",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-119",
+    "transcript": "Sunita bhai ko 75 rupaye ka shaadi diya, Friday",
+    "ground_truth": {
+      "customer_name": "Sunita",
+      "amount_rupees": 75,
+      "due_day": "Friday",
+      "context": "shaadi",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-120",
+    "transcript": "Iqbal ke khate mein 5000 rupees, dawai, bola agle Monday",
+    "ground_truth": {
+      "customer_name": "Iqbal",
+      "amount_rupees": 5000,
+      "due_day": "agle Monday",
+      "context": "dawai",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-121",
+    "transcript": "Mohan ne khate mein 1200 rupees chukaya",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 1200,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-122",
+    "transcript": "aaj Amit ne bachche ki fees liya 850 ka, payment month end",
+    "ground_truth": {
+      "customer_name": "Amit",
+      "amount_rupees": 850,
+      "due_day": "month end",
+      "context": "bachche ki fees",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-123",
+    "transcript": "Amit bhai ko 5000 rupaye ka dawai diya, Friday",
+    "ground_truth": {
+      "customer_name": "Amit",
+      "amount_rupees": 5000,
+      "due_day": "Friday",
+      "context": "dawai",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-124",
+    "transcript": "Amit ke khate mein 75 rupees, diwali samaan, bola koi date nahi",
+    "ground_truth": {
+      "customer_name": "Amit",
+      "amount_rupees": 75,
+      "due_day": null,
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-125",
+    "transcript": "Deepak ne 250 rupaye jama kar diye",
+    "ground_truth": {
+      "customer_name": "Deepak",
+      "amount_rupees": 250,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-126",
+    "transcript": "Amit bhai ko 20 rupaye ka diwali samaan diya, Friday",
+    "ground_truth": {
+      "customer_name": "Amit",
+      "amount_rupees": 20,
+      "due_day": "Friday",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-127",
+    "transcript": "Pooja bhai ko 850 rupaye ka ration diya, is mahine ke end tak",
+    "ground_truth": {
+      "customer_name": "Pooja",
+      "amount_rupees": 850,
+      "due_day": "is mahine ke end tak",
+      "context": "ration",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-128",
+    "transcript": "Pooja ke khate mein 120 rupees, shaadi, bola jaldi",
+    "ground_truth": {
+      "customer_name": "Pooja",
+      "amount_rupees": 120,
+      "due_day": "jaldi",
+      "context": "shaadi",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-129",
+    "transcript": "Amit ka 1200 payment aa gaya",
+    "ground_truth": {
+      "customer_name": "Amit",
+      "amount_rupees": 1200,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-130",
+    "transcript": "aaj Rekha ne bachche ki fees liya 480 ka, payment koi date nahi",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 480,
+      "due_day": null,
+      "context": "bachche ki fees",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-131",
+    "transcript": "Sunita bhai ko 5000 rupaye ka dawai diya, koi date nahi",
+    "ground_truth": {
+      "customer_name": "Sunita",
+      "amount_rupees": 5000,
+      "due_day": null,
+      "context": "dawai",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-132",
+    "transcript": "Deepak ke khate mein 2500 rupees, school books, bola is mahine ke end tak",
+    "ground_truth": {
+      "customer_name": "Deepak",
+      "amount_rupees": 2500,
+      "due_day": "is mahine ke end tak",
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-133",
+    "transcript": "Iqbal ne 1200 rupaye jama kar diye",
+    "ground_truth": {
+      "customer_name": "Iqbal",
+      "amount_rupees": 1200,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-134",
+    "transcript": "Mohan bhai ko 50 rupaye ka dawai diya, agle Monday",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 50,
+      "due_day": "agle Monday",
+      "context": "dawai",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-135",
+    "transcript": "Shabnam bhai ko 2500 rupaye ka bachche ki fees diya, agle Monday",
+    "ground_truth": {
+      "customer_name": "Shabnam",
+      "amount_rupees": 2500,
+      "due_day": "agle Monday",
+      "context": "bachche ki fees",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-136",
+    "transcript": "Shabnam ke khate mein 850 rupees, diwali samaan, bola is mahine ke end tak",
+    "ground_truth": {
+      "customer_name": "Shabnam",
+      "amount_rupees": 850,
+      "due_day": "is mahine ke end tak",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-137",
+    "transcript": "Ramesh ne 75 rupaye jama kar diye",
+    "ground_truth": {
+      "customer_name": "Ramesh",
+      "amount_rupees": 75,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-138",
+    "transcript": "Pooja ke khate mein 20 rupees, diwali samaan, bola jaldi",
+    "ground_truth": {
+      "customer_name": "Pooja",
+      "amount_rupees": 20,
+      "due_day": "jaldi",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-139",
+    "transcript": "Kavita ke khate mein 2500 rupees, dawai, bola koi date nahi",
+    "ground_truth": {
+      "customer_name": "Kavita",
+      "amount_rupees": 2500,
+      "due_day": null,
+      "context": "dawai",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-140",
+    "transcript": "Amit ke khate mein 2500 rupees, ration, bola agle Monday",
+    "ground_truth": {
+      "customer_name": "Amit",
+      "amount_rupees": 2500,
+      "due_day": "agle Monday",
+      "context": "ration",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-141",
+    "transcript": "Pooja ne khate mein 50 rupees chukaya",
+    "ground_truth": {
+      "customer_name": "Pooja",
+      "amount_rupees": 50,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-142",
+    "transcript": "Deepak bhai ko 850 rupaye ka dawai diya, agle Monday",
+    "ground_truth": {
+      "customer_name": "Deepak",
+      "amount_rupees": 850,
+      "due_day": "agle Monday",
+      "context": "dawai",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-143",
+    "transcript": "aaj Shabnam ne dawai liya 50 ka, payment month end",
+    "ground_truth": {
+      "customer_name": "Shabnam",
+      "amount_rupees": 50,
+      "due_day": "month end",
+      "context": "dawai",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-144",
+    "transcript": "Ramesh bhai ko 480 rupaye ka ration diya, is mahine ke end tak",
+    "ground_truth": {
+      "customer_name": "Ramesh",
+      "amount_rupees": 480,
+      "due_day": "is mahine ke end tak",
+      "context": "ration",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-145",
+    "transcript": "Deepak ne 120 rupaye jama kar diye",
+    "ground_truth": {
+      "customer_name": "Deepak",
+      "amount_rupees": 120,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-146",
+    "transcript": "aaj Shabnam ne diwali samaan liya 5000 ka, payment agle Monday",
+    "ground_truth": {
+      "customer_name": "Shabnam",
+      "amount_rupees": 5000,
+      "due_day": "agle Monday",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-147",
+    "transcript": "aaj Deepak ne diwali samaan liya 75 ka, payment month end",
+    "ground_truth": {
+      "customer_name": "Deepak",
+      "amount_rupees": 75,
+      "due_day": "month end",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-148",
+    "transcript": "aaj Shabnam ne dawai liya 5000 ka, payment agle Monday",
+    "ground_truth": {
+      "customer_name": "Shabnam",
+      "amount_rupees": 5000,
+      "due_day": "agle Monday",
+      "context": "dawai",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-149",
+    "transcript": "Ramesh ne khate mein 50 rupees chukaya",
+    "ground_truth": {
+      "customer_name": "Ramesh",
+      "amount_rupees": 50,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-150",
+    "transcript": "aaj Mohan ne ration liya 250 ka, payment koi date nahi",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 250,
+      "due_day": null,
+      "context": "ration",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-151",
+    "transcript": "Iqbal ke khate mein 1200 rupees, ration, bola is mahine ke end tak",
+    "ground_truth": {
+      "customer_name": "Iqbal",
+      "amount_rupees": 1200,
+      "due_day": "is mahine ke end tak",
+      "context": "ration",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-152",
+    "transcript": "aaj Pooja ne shaadi liya 120 ka, payment jaldi",
+    "ground_truth": {
+      "customer_name": "Pooja",
+      "amount_rupees": 120,
+      "due_day": "jaldi",
+      "context": "shaadi",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-153",
+    "transcript": "Shabnam ne khate mein 120 rupees chukaya",
+    "ground_truth": {
+      "customer_name": "Shabnam",
+      "amount_rupees": 120,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-154",
+    "transcript": "Iqbal ke khate mein 1200 rupees, bachche ki fees, bola Friday",
+    "ground_truth": {
+      "customer_name": "Iqbal",
+      "amount_rupees": 1200,
+      "due_day": "Friday",
+      "context": "bachche ki fees",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-155",
+    "transcript": "Iqbal ke khate mein 5000 rupees, diwali samaan, bola is mahine ke end tak",
+    "ground_truth": {
+      "customer_name": "Iqbal",
+      "amount_rupees": 5000,
+      "due_day": "is mahine ke end tak",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-156",
+    "transcript": "Pooja bhai ko 50 rupaye ka shaadi diya, agle Monday",
+    "ground_truth": {
+      "customer_name": "Pooja",
+      "amount_rupees": 50,
+      "due_day": "agle Monday",
+      "context": "shaadi",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-157",
+    "transcript": "Kavita ne 250 rupaye jama kar diye",
+    "ground_truth": {
+      "customer_name": "Kavita",
+      "amount_rupees": 250,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-158",
+    "transcript": "Rekha ke khate mein 5000 rupees, school books, bola koi date nahi",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 5000,
+      "due_day": null,
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-159",
+    "transcript": "Mohan bhai ko 480 rupaye ka ration diya, is mahine ke end tak",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 480,
+      "due_day": "is mahine ke end tak",
+      "context": "ration",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-160",
+    "transcript": "Amit ke khate mein 850 rupees, bachche ki fees, bola jaldi",
+    "ground_truth": {
+      "customer_name": "Amit",
+      "amount_rupees": 850,
+      "due_day": "jaldi",
+      "context": "bachche ki fees",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-161",
+    "transcript": "Iqbal ka 5000 payment aa gaya",
+    "ground_truth": {
+      "customer_name": "Iqbal",
+      "amount_rupees": 5000,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-162",
+    "transcript": "aaj Ramesh ne school books liya 120 ka, payment month end",
+    "ground_truth": {
+      "customer_name": "Ramesh",
+      "amount_rupees": 120,
+      "due_day": "month end",
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-163",
+    "transcript": "aaj Mohan ne school books liya 2500 ka, payment Friday",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 2500,
+      "due_day": "Friday",
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-164",
+    "transcript": "Sunita bhai ko 250 rupaye ka diwali samaan diya, Friday",
+    "ground_truth": {
+      "customer_name": "Sunita",
+      "amount_rupees": 250,
+      "due_day": "Friday",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-165",
+    "transcript": "Amit ka 2500 payment aa gaya",
+    "ground_truth": {
+      "customer_name": "Amit",
+      "amount_rupees": 2500,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-166",
+    "transcript": "Iqbal bhai ko 75 rupaye ka shaadi diya, is mahine ke end tak",
+    "ground_truth": {
+      "customer_name": "Iqbal",
+      "amount_rupees": 75,
+      "due_day": "is mahine ke end tak",
+      "context": "shaadi",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-167",
+    "transcript": "Pooja bhai ko 20 rupaye ka shaadi diya, jaldi",
+    "ground_truth": {
+      "customer_name": "Pooja",
+      "amount_rupees": 20,
+      "due_day": "jaldi",
+      "context": "shaadi",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-168",
+    "transcript": "Mohan ke khate mein 75 rupees, school books, bola is mahine ke end tak",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 75,
+      "due_day": "is mahine ke end tak",
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-169",
+    "transcript": "Pooja ne khate mein 480 rupees chukaya",
+    "ground_truth": {
+      "customer_name": "Pooja",
+      "amount_rupees": 480,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-170",
+    "transcript": "aaj Shabnam ne diwali samaan liya 2500 ka, payment jaldi",
+    "ground_truth": {
+      "customer_name": "Shabnam",
+      "amount_rupees": 2500,
+      "due_day": "jaldi",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-171",
+    "transcript": "Sunita ke khate mein 20 rupees, school books, bola month end",
+    "ground_truth": {
+      "customer_name": "Sunita",
+      "amount_rupees": 20,
+      "due_day": "month end",
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-172",
+    "transcript": "aaj Rekha ne school books liya 480 ka, payment agle Monday",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 480,
+      "due_day": "agle Monday",
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-173",
+    "transcript": "Sunita ka 480 payment aa gaya",
+    "ground_truth": {
+      "customer_name": "Sunita",
+      "amount_rupees": 480,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-174",
+    "transcript": "Iqbal ke khate mein 850 rupees, diwali samaan, bola agle Monday",
+    "ground_truth": {
+      "customer_name": "Iqbal",
+      "amount_rupees": 850,
+      "due_day": "agle Monday",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-175",
+    "transcript": "Mohan ke khate mein 50 rupees, ration, bola jaldi",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 50,
+      "due_day": "jaldi",
+      "context": "ration",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-176",
+    "transcript": "Pooja ke khate mein 480 rupees, shaadi, bola jaldi",
+    "ground_truth": {
+      "customer_name": "Pooja",
+      "amount_rupees": 480,
+      "due_day": "jaldi",
+      "context": "shaadi",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-177",
+    "transcript": "Shabnam ne 120 rupaye jama kar diye",
+    "ground_truth": {
+      "customer_name": "Shabnam",
+      "amount_rupees": 120,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-178",
+    "transcript": "Mohan bhai ko 75 rupaye ka ration diya, agle Monday",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 75,
+      "due_day": "agle Monday",
+      "context": "ration",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-179",
+    "transcript": "aaj Iqbal ne bachche ki fees liya 20 ka, payment Friday",
+    "ground_truth": {
+      "customer_name": "Iqbal",
+      "amount_rupees": 20,
+      "due_day": "Friday",
+      "context": "bachche ki fees",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-180",
+    "transcript": "Amit ke khate mein 2500 rupees, diwali samaan, bola Friday",
+    "ground_truth": {
+      "customer_name": "Amit",
+      "amount_rupees": 2500,
+      "due_day": "Friday",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-181",
+    "transcript": "Shabnam ne khate mein 75 rupees chukaya",
+    "ground_truth": {
+      "customer_name": "Shabnam",
+      "amount_rupees": 75,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-182",
+    "transcript": "Deepak ke khate mein 5000 rupees, dawai, bola koi date nahi",
+    "ground_truth": {
+      "customer_name": "Deepak",
+      "amount_rupees": 5000,
+      "due_day": null,
+      "context": "dawai",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-183",
+    "transcript": "Mohan ke khate mein 5000 rupees, shaadi, bola is mahine ke end tak",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 5000,
+      "due_day": "is mahine ke end tak",
+      "context": "shaadi",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-184",
+    "transcript": "Iqbal bhai ko 1200 rupaye ka diwali samaan diya, Friday",
+    "ground_truth": {
+      "customer_name": "Iqbal",
+      "amount_rupees": 1200,
+      "due_day": "Friday",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-185",
+    "transcript": "Sunita ne khate mein 2500 rupees chukaya",
+    "ground_truth": {
+      "customer_name": "Sunita",
+      "amount_rupees": 2500,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-186",
+    "transcript": "Ramesh bhai ko 1200 rupaye ka school books diya, koi date nahi",
+    "ground_truth": {
+      "customer_name": "Ramesh",
+      "amount_rupees": 1200,
+      "due_day": null,
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-187",
+    "transcript": "Deepak bhai ko 75 rupaye ka diwali samaan diya, agle Monday",
+    "ground_truth": {
+      "customer_name": "Deepak",
+      "amount_rupees": 75,
+      "due_day": "agle Monday",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-188",
+    "transcript": "Amit bhai ko 20 rupaye ka school books diya, koi date nahi",
+    "ground_truth": {
+      "customer_name": "Amit",
+      "amount_rupees": 20,
+      "due_day": null,
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-189",
+    "transcript": "Rekha ne 250 rupaye jama kar diye",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 250,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-190",
+    "transcript": "Rekha ke khate mein 250 rupees, school books, bola is mahine ke end tak",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 250,
+      "due_day": "is mahine ke end tak",
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-191",
+    "transcript": "aaj Sunita ne diwali samaan liya 20 ka, payment agle Monday",
+    "ground_truth": {
+      "customer_name": "Sunita",
+      "amount_rupees": 20,
+      "due_day": "agle Monday",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-192",
+    "transcript": "aaj Mohan ne diwali samaan liya 2500 ka, payment agle Monday",
+    "ground_truth": {
+      "customer_name": "Mohan",
+      "amount_rupees": 2500,
+      "due_day": "agle Monday",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-193",
+    "transcript": "Amit ka 120 payment aa gaya",
+    "ground_truth": {
+      "customer_name": "Amit",
+      "amount_rupees": 120,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-194",
+    "transcript": "Rekha ke khate mein 1200 rupees, bachche ki fees, bola Friday",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 1200,
+      "due_day": "Friday",
+      "context": "bachche ki fees",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-195",
+    "transcript": "aaj Pooja ne diwali samaan liya 480 ka, payment month end",
+    "ground_truth": {
+      "customer_name": "Pooja",
+      "amount_rupees": 480,
+      "due_day": "month end",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-196",
+    "transcript": "aaj Rekha ne diwali samaan liya 50 ka, payment is mahine ke end tak",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 50,
+      "due_day": "is mahine ke end tak",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-197",
+    "transcript": "Sunita ka 480 payment aa gaya",
+    "ground_truth": {
+      "customer_name": "Sunita",
+      "amount_rupees": 480,
+      "due_day": null,
+      "context": null,
+      "transaction_type": "credit_paid"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-198",
+    "transcript": "aaj Shabnam ne school books liya 20 ka, payment jaldi",
+    "ground_truth": {
+      "customer_name": "Shabnam",
+      "amount_rupees": 20,
+      "due_day": "jaldi",
+      "context": "school books",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-199",
+    "transcript": "Iqbal bhai ko 250 rupaye ka diwali samaan diya, koi date nahi",
+    "ground_truth": {
+      "customer_name": "Iqbal",
+      "amount_rupees": 250,
+      "due_day": null,
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  },
+  {
+    "id": "synthetic-200",
+    "transcript": "Rekha bhai ko 5000 rupaye ka diwali samaan diya, agle Monday",
+    "ground_truth": {
+      "customer_name": "Rekha",
+      "amount_rupees": 5000,
+      "due_day": "agle Monday",
+      "context": "diwali samaan",
+      "transaction_type": "credit_given"
+    },
+    "synthetic": true
+  }
+]

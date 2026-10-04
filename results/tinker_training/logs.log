@@ -1,0 +1,299 @@
+root:680 [INFO] Command line invocation: /Users/amritkang/Desktop/legder-book/scripts/finetune/train_tinker.py
+tinker_cookbook.utils.ml_log:618 [INFO] Logging to: /Users/amritkang/Desktop/legder-book/results/tinker_training
+tinker.lib.public_interfaces.service_client:151 [INFO] ServiceClient initialized for session 3fd70604-4ddc-5eae-a7a5-d6d26a025b24
+tinker.lib.public_interfaces.service_client:293 [INFO] TrainingClient initialized for model 3fd70604-4ddc-5eae-a7a5-d6d26a025b24:train:0
+tinker_cookbook.supervised.train:390 [INFO] Training for 10 batches x 1 epochs = 10 steps
+tinker_cookbook.supervised.train:543 [INFO] Starting epoch 0
+tinker_cookbook.supervised.common:339 [INFO] Weight reduction: 'mean' (token-mean loss)
+tinker_cookbook.supervised.train:419 [INFO] <|im_start|>system
+Extract the kirana credit note into one compact JSON object with exactly these keys: customer_name, amount_rupees, due_day, context, transaction_type, confidence. transaction_type must be credit_given or credit_paid. Return JSON only. Never invent an amount.<|im_end|>
+<|im_start|>user
+Iqbal ka 20 payment aa gaya<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+{"customer_name":"Iqbal","amount_rupees":20,"due_day":null,"context":null,"transaction_type":"credit_paid","confidence":1.0}<|im_end|>
+tinker_cookbook.utils.ml_log:206 [INFO] Wrote metrics to /Users/amritkang/Desktop/legder-book/results/tinker_training/metrics.jsonl
+tinker_cookbook.utils.ml_log:279 [INFO] 
+               Step 0               
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃ Metric               ┃ Value     ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ epoch                │ 0         │
+│ learning_rate        │ 0.000100  │
+│ num_loss_tokens      │ 16.000000 │
+│ num_sequences        │ 16        │
+│ num_tokens           │ 2008      │
+│ progress             │ 0.100000  │
+│ time/finish_batch    │ 3.740824  │
+│ time/get_batch       │ 0.018707  │
+│ time/step            │ 3.730020  │
+│ time/submit_batch    │ 0.019104  │
+│ train_mean_bpb       │ 0.137428  │
+│ train_mean_nll       │ 0.326614  │
+└──────────────────────┴───────────┘
+tinker_cookbook.supervised.train:419 [INFO] <|im_start|>system
+Extract the kirana credit note into one compact JSON object with exactly these keys: customer_name, amount_rupees, due_day, context, transaction_type, confidence. transaction_type must be credit_given or credit_paid. Return JSON only. Never invent an amount.<|im_end|>
+<|im_start|>user
+Shabnam ne 120 rupaye jama kar diye<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+{"customer_name":"Shabnam","amount_rupees":120,"due_day":null,"context":null,"transaction_type":"credit_paid","confidence":1.0}<|im_end|>
+tinker_cookbook.utils.ml_log:206 [INFO] Wrote metrics to /Users/amritkang/Desktop/legder-book/results/tinker_training/metrics.jsonl
+tinker_cookbook.utils.ml_log:279 [INFO] 
+               Step 1               
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃ Metric               ┃ Value     ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ epoch                │ 0         │
+│ learning_rate        │ 0.000090  │
+│ num_loss_tokens      │ 16.000000 │
+│ num_sequences        │ 16        │
+│ num_tokens           │ 2034      │
+│ progress             │ 0.200000  │
+│ time/finish_batch    │ 3.828406  │
+│ time/get_batch       │ 0.014049  │
+│ time/step            │ 3.824407  │
+│ time/submit_batch    │ 0.014535  │
+│ train_mean_bpb       │ 0.054903  │
+│ train_mean_nll       │ 0.131693  │
+└──────────────────────┴───────────┘
+tinker_cookbook.supervised.train:419 [INFO] <|im_start|>system
+Extract the kirana credit note into one compact JSON object with exactly these keys: customer_name, amount_rupees, due_day, context, transaction_type, confidence. transaction_type must be credit_given or credit_paid. Return JSON only. Never invent an amount.<|im_end|>
+<|im_start|>user
+Deepak ke khate mein 2500 rupees, school books, bola is mahine ke end tak<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+{"customer_name":"Deepak","amount_rupees":2500,"due_day":"is mahine ke end tak","context":"school books","transaction_type":"credit_given","confidence":1.0}<|im_end|>
+tinker_cookbook.utils.ml_log:206 [INFO] Wrote metrics to /Users/amritkang/Desktop/legder-book/results/tinker_training/metrics.jsonl
+tinker_cookbook.utils.ml_log:279 [INFO] 
+               Step 2               
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃ Metric               ┃ Value     ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ epoch                │ 0         │
+│ learning_rate        │ 0.000080  │
+│ num_loss_tokens      │ 16.000000 │
+│ num_sequences        │ 16        │
+│ num_tokens           │ 2060      │
+│ progress             │ 0.300000  │
+│ time/finish_batch    │ 3.722979  │
+│ time/get_batch       │ 0.017950  │
+│ time/step            │ 3.718925  │
+│ time/submit_batch    │ 0.018545  │
+│ train_mean_bpb       │ 0.024660  │
+│ train_mean_nll       │ 0.058864  │
+└──────────────────────┴───────────┘
+tinker_cookbook.supervised.train:419 [INFO] <|im_start|>system
+Extract the kirana credit note into one compact JSON object with exactly these keys: customer_name, amount_rupees, due_day, context, transaction_type, confidence. transaction_type must be credit_given or credit_paid. Return JSON only. Never invent an amount.<|im_end|>
+<|im_start|>user
+Kavita ne 250 rupaye jama kar diye<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+{"customer_name":"Kavita","amount_rupees":250,"due_day":null,"context":null,"transaction_type":"credit_paid","confidence":1.0}<|im_end|>
+tinker_cookbook.utils.ml_log:206 [INFO] Wrote metrics to /Users/amritkang/Desktop/legder-book/results/tinker_training/metrics.jsonl
+tinker_cookbook.utils.ml_log:279 [INFO] 
+               Step 3               
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃ Metric               ┃ Value     ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ epoch                │ 0         │
+│ learning_rate        │ 0.000070  │
+│ num_loss_tokens      │ 16.000000 │
+│ num_sequences        │ 16        │
+│ num_tokens           │ 2000      │
+│ progress             │ 0.400000  │
+│ time/finish_batch    │ 3.883126  │
+│ time/get_batch       │ 0.016692  │
+│ time/step            │ 3.878549  │
+│ time/submit_batch    │ 0.017204  │
+│ train_mean_bpb       │ 0.007831  │
+│ train_mean_nll       │ 0.018867  │
+└──────────────────────┴───────────┘
+tinker_cookbook.supervised.train:419 [INFO] <|im_start|>system
+Extract the kirana credit note into one compact JSON object with exactly these keys: customer_name, amount_rupees, due_day, context, transaction_type, confidence. transaction_type must be credit_given or credit_paid. Return JSON only. Never invent an amount.<|im_end|>
+<|im_start|>user
+Iqbal ke khate mein 5000 rupees, diwali samaan, bola is mahine ke end tak<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+{"customer_name":"Iqbal","amount_rupees":5000,"due_day":"is mahine ke end tak","context":"diwali samaan","transaction_type":"credit_given","confidence":1.0}<|im_end|>
+tinker_cookbook.utils.ml_log:206 [INFO] Wrote metrics to /Users/amritkang/Desktop/legder-book/results/tinker_training/metrics.jsonl
+tinker_cookbook.utils.ml_log:279 [INFO] 
+               Step 4               
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃ Metric               ┃ Value     ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ epoch                │ 0         │
+│ learning_rate        │ 0.000060  │
+│ num_loss_tokens      │ 16.000000 │
+│ num_sequences        │ 16        │
+│ num_tokens           │ 2027      │
+│ progress             │ 0.500000  │
+│ time/finish_batch    │ 2.688710  │
+│ time/get_batch       │ 0.017148  │
+│ time/step            │ 2.684549  │
+│ time/submit_batch    │ 0.017612  │
+│ train_mean_bpb       │ 0.009861  │
+│ train_mean_nll       │ 0.023586  │
+└──────────────────────┴───────────┘
+tinker_cookbook.supervised.train:419 [INFO] <|im_start|>system
+Extract the kirana credit note into one compact JSON object with exactly these keys: customer_name, amount_rupees, due_day, context, transaction_type, confidence. transaction_type must be credit_given or credit_paid. Return JSON only. Never invent an amount.<|im_end|>
+<|im_start|>user
+Iqbal ne 250 rupaye jama kar diye<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+{"customer_name":"Iqbal","amount_rupees":250,"due_day":null,"context":null,"transaction_type":"credit_paid","confidence":1.0}<|im_end|>
+tinker_cookbook.utils.ml_log:206 [INFO] Wrote metrics to /Users/amritkang/Desktop/legder-book/results/tinker_training/metrics.jsonl
+tinker_cookbook.utils.ml_log:279 [INFO] 
+               Step 5               
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃ Metric               ┃ Value     ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ epoch                │ 0         │
+│ learning_rate        │ 0.000050  │
+│ num_loss_tokens      │ 16.000000 │
+│ num_sequences        │ 16        │
+│ num_tokens           │ 2057      │
+│ progress             │ 0.600000  │
+│ time/finish_batch    │ 2.734724  │
+│ time/get_batch       │ 0.017101  │
+│ time/step            │ 2.730016  │
+│ time/submit_batch    │ 0.017768  │
+│ train_mean_bpb       │ 0.002741  │
+│ train_mean_nll       │ 0.006566  │
+└──────────────────────┴───────────┘
+tinker_cookbook.supervised.train:419 [INFO] <|im_start|>system
+Extract the kirana credit note into one compact JSON object with exactly these keys: customer_name, amount_rupees, due_day, context, transaction_type, confidence. transaction_type must be credit_given or credit_paid. Return JSON only. Never invent an amount.<|im_end|>
+<|im_start|>user
+aaj Iqbal ne school books liya 120 ka, payment koi date nahi<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+{"customer_name":"Iqbal","amount_rupees":120,"due_day":null,"context":"school books","transaction_type":"credit_given","confidence":1.0}<|im_end|>
+tinker_cookbook.utils.ml_log:206 [INFO] Wrote metrics to /Users/amritkang/Desktop/legder-book/results/tinker_training/metrics.jsonl
+tinker_cookbook.utils.ml_log:279 [INFO] 
+               Step 6               
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃ Metric               ┃ Value     ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ epoch                │ 0         │
+│ learning_rate        │ 0.000040  │
+│ num_loss_tokens      │ 16.000000 │
+│ num_sequences        │ 16        │
+│ num_tokens           │ 2060      │
+│ progress             │ 0.700000  │
+│ time/finish_batch    │ 2.730640  │
+│ time/get_batch       │ 0.017541  │
+│ time/step            │ 2.729115  │
+│ time/submit_batch    │ 0.018131  │
+│ train_mean_bpb       │ 0.001464  │
+│ train_mean_nll       │ 0.003599  │
+└──────────────────────┴───────────┘
+tinker_cookbook.supervised.train:419 [INFO] <|im_start|>system
+Extract the kirana credit note into one compact JSON object with exactly these keys: customer_name, amount_rupees, due_day, context, transaction_type, confidence. transaction_type must be credit_given or credit_paid. Return JSON only. Never invent an amount.<|im_end|>
+<|im_start|>user
+Kavita bhai ko 50 rupaye ka shaadi diya, agle Monday<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+{"customer_name":"Kavita","amount_rupees":50,"due_day":"agle Monday","context":"shaadi","transaction_type":"credit_given","confidence":1.0}<|im_end|>
+tinker_cookbook.utils.ml_log:206 [INFO] Wrote metrics to /Users/amritkang/Desktop/legder-book/results/tinker_training/metrics.jsonl
+tinker_cookbook.utils.ml_log:279 [INFO] 
+               Step 7               
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃ Metric               ┃ Value     ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ epoch                │ 0         │
+│ learning_rate        │ 0.000030  │
+│ num_loss_tokens      │ 16.000000 │
+│ num_sequences        │ 16        │
+│ num_tokens           │ 2015      │
+│ progress             │ 0.800000  │
+│ time/finish_batch    │ 2.812169  │
+│ time/get_batch       │ 0.009007  │
+│ time/step            │ 2.808268  │
+│ time/submit_batch    │ 0.009267  │
+│ train_mean_bpb       │ 0.001036  │
+│ train_mean_nll       │ 0.002560  │
+└──────────────────────┴───────────┘
+tinker_cookbook.supervised.train:419 [INFO] <|im_start|>system
+Extract the kirana credit note into one compact JSON object with exactly these keys: customer_name, amount_rupees, due_day, context, transaction_type, confidence. transaction_type must be credit_given or credit_paid. Return JSON only. Never invent an amount.<|im_end|>
+<|im_start|>user
+Deepak ne 120 rupaye jama kar diye<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+{"customer_name":"Deepak","amount_rupees":120,"due_day":null,"context":null,"transaction_type":"credit_paid","confidence":1.0}<|im_end|>
+tinker_cookbook.utils.ml_log:206 [INFO] Wrote metrics to /Users/amritkang/Desktop/legder-book/results/tinker_training/metrics.jsonl
+tinker_cookbook.utils.ml_log:279 [INFO] 
+               Step 8               
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃ Metric               ┃ Value     ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ epoch                │ 0         │
+│ learning_rate        │ 0.000020  │
+│ num_loss_tokens      │ 16.000000 │
+│ num_sequences        │ 16        │
+│ num_tokens           │ 2035      │
+│ progress             │ 0.900000  │
+│ time/finish_batch    │ 2.951089  │
+│ time/get_batch       │ 0.016712  │
+│ time/step            │ 2.947086  │
+│ time/submit_batch    │ 0.017241  │
+│ train_mean_bpb       │ 0.001264  │
+│ train_mean_nll       │ 0.003001  │
+└──────────────────────┴───────────┘
+tinker_cookbook.supervised.train:419 [INFO] <|im_start|>system
+Extract the kirana credit note into one compact JSON object with exactly these keys: customer_name, amount_rupees, due_day, context, transaction_type, confidence. transaction_type must be credit_given or credit_paid. Return JSON only. Never invent an amount.<|im_end|>
+<|im_start|>user
+aaj Deepak ne diwali samaan liya 75 ka, payment month end<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+{"customer_name":"Deepak","amount_rupees":75,"due_day":"month end","context":"diwali samaan","transaction_type":"credit_given","confidence":1.0}<|im_end|>
+tinker_cookbook.utils.ml_log:206 [INFO] Wrote metrics to /Users/amritkang/Desktop/legder-book/results/tinker_training/metrics.jsonl
+tinker_cookbook.utils.ml_log:279 [INFO] 
+               Step 9               
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃ Metric               ┃ Value     ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ epoch                │ 0         │
+│ learning_rate        │ 0.000010  │
+│ num_loss_tokens      │ 16.000000 │
+│ num_sequences        │ 16        │
+│ num_tokens           │ 2033      │
+│ progress             │ 1.000000  │
+│ time/finish_batch    │ 2.844913  │
+│ time/get_batch       │ 0.017112  │
+│ time/step            │ 2.841046  │
+│ time/submit_batch    │ 0.017626  │
+│ train_mean_bpb       │ 0.001266  │
+│ train_mean_nll       │ 0.003041  │
+└──────────────────────┴───────────┘
+tinker_cookbook.checkpoint_utils:467 [INFO] Saved checkpoints: {'state_path': 'tinker://3fd70604-4ddc-5eae-a7a5-d6d26a025b24:train:0/weights/final', 'sampler_path': 'tinker://3fd70604-4ddc-5eae-a7a5-d6d26a025b24:train:0/sampler_weights/final'}
+tinker_cookbook.supervised.train:584 [INFO] Training completed successfully
