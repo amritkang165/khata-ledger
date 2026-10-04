@@ -44,7 +44,7 @@ function formatApiError(body) {
   return typeof body?.message === 'string' ? body.message : 'Please check the information and try again.';
 }
 
-async function showApp(user) {
+async function showApp(user, notice = '') {
   document.querySelector('#account-name').textContent = user.display_name;
   document.querySelector('#owner-greeting').textContent = user.display_name.split(' ')[0];
   document.querySelector('#shop-name').textContent = user.shop_name;
@@ -56,6 +56,9 @@ async function showApp(user) {
   }).format(new Date());
   authView.classList.add('hidden');
   appView.classList.remove('hidden');
+  const appNotice = document.querySelector('#app-notice');
+  appNotice.textContent = notice;
+  appNotice.classList.toggle('hidden', !notice);
   await refresh();
 }
 
@@ -218,7 +221,7 @@ for (const [formId, endpoint] of [['login-form', '/api/auth/login'], ['register-
     const body = await response.json();
     if (!response.ok) { showAuth(formatApiError(body)); return; }
     event.currentTarget.reset();
-    await showApp(body);
+    await showApp(body, formId === 'register-form' ? 'Account created successfully. Your shop ledger is ready.' : '');
   });
 }
 
