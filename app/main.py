@@ -4,7 +4,7 @@ import json
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-from fastapi import Depends, FastAPI, File, Form, HTTPException, Request, Response, UploadFile
+from fastapi import Depends, FastAPI, File, Form, Header, HTTPException, Request, Response, UploadFile
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -67,6 +67,15 @@ def current_user(request: Request) -> dict:
     if not user:
         raise HTTPException(status_code=401, detail="Sign in to access your ledger")
     return user
+
+
+def _clean_idempotency_key(value: str | None) -> str | None:
+    if not value or not value.strip():
+        return None
+    key = value.strip()
+    if len(key) > 128:
+        raise HTTPException(status_code=422, detail="Idempotency key is too long")
+    return key
 
 
 @app.get("/", include_in_schema=False)
@@ -159,7 +168,12 @@ def get_reviews(user: dict = Depends(current_user)):
 
 
 @app.post("/api/reviews/{review_id}/approve")
-def approve_review(review_id: int, entry: ExtractedEntry, user: dict = Depends(current_user)):
+def approve_review(
+    review_id: int,
+    entry: ExtractedEntry,
+    user: dict = Depends(current_user),
+    idempotency_key: str | None = Header(default=None, alias="Idempotency-Key"),
+):
     if entry.amount_rupees is None:
         raise HTTPException(status_code=422, detail="Enter an amount before adding this entry")
     if not any(row["id"] == review_id for row in ledger.review_rows(user["id"])):
@@ -169,9 +183,14 @@ def approve_review(review_id: int, entry: ExtractedEntry, user: dict = Depends(c
         user_id=user["id"], customer_name=matched_name, amount_rupees=entry.amount_rupees,
         transaction_type=entry.transaction_type, due_day=entry.due_day,
         context=entry.context, transcript="approved after manual review",
+        idempotency_key=_clean_idempotency_key(idempotency_key),
     )
     ledger.delete_review(user["id"], review_id)
-    return {"status": "inserted", "transaction": transaction}
+    return {
+        "status": "inserted",
+        "deduplicated": transaction.pop("deduplicated", False),
+        "transaction": transaction,
+    }
 
 
 @app.delete("/api/reviews/{review_id}", status_code=204)
@@ -203,7 +222,9 @@ async def post_note(
     audio: UploadFile | None = File(default=None),
     transcript: str | None = Form(default=None),
     user: dict = Depends(current_user),
+    idempotency_key: str | None = Header(default=None, alias="Idempotency-Key"),
 ):
+    request_key = _clean_idempotency_key(idempotency_key)
     if transcript and transcript.strip():
         text = transcript.strip()
         transcription_provider = "manual-demo-input"
@@ -224,10 +245,13 @@ async def post_note(
     result = await extract_entry(text, settings)
     entry = result.entry
     if entry.confidence < 0.6 or entry.amount_rupees is None:
-        ledger.add_review(user["id"], text, entry.model_dump_json(), "low confidence or missing amount")
+        created = ledger.add_review(
+            user["id"], text, entry.model_dump_json(), "low confidence or missing amount", request_key
+        )
         return NoteResponse(
             transcript=text, extracted=entry, status="review_required",
             transcription_provider=transcription_provider, extraction_provider=result.provider,
+            deduplicated=not created,
         )
 
     matched_name, _score = match_customer(entry.customer_name, ledger.customer_names(user["id"]))
@@ -235,9 +259,11 @@ async def post_note(
         user_id=user["id"], customer_name=matched_name, amount_rupees=entry.amount_rupees,
         transaction_type=entry.transaction_type, due_day=entry.due_day,
         context=entry.context, transcript=text,
+        idempotency_key=request_key,
     )
+    deduplicated = transaction.pop("deduplicated", False)
     return NoteResponse(
         transcript=text, extracted=entry, status="inserted", transaction=transaction,
         matched_customer=matched_name, transcription_provider=transcription_provider,
-        extraction_provider=result.provider,
+        extraction_provider=result.provider, deduplicated=deduplicated,
     )

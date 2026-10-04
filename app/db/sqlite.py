@@ -69,6 +69,7 @@ CREATE TABLE IF NOT EXISTS ledger_transactions (
     context TEXT,
     transcript TEXT,
     happened_on TEXT NOT NULL,
+    idempotency_key TEXT,
     created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 CREATE INDEX IF NOT EXISTS idx_ledger_transactions_user ON ledger_transactions(user_id, happened_on);
@@ -78,6 +79,7 @@ CREATE TABLE IF NOT EXISTS ledger_reviews (
     transcript TEXT NOT NULL,
     extracted_json TEXT NOT NULL,
     reason TEXT NOT NULL,
+    idempotency_key TEXT,
     created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 CREATE TABLE IF NOT EXISTS app_metadata (
@@ -116,6 +118,26 @@ class Ledger:
             for name, definition in additions.items():
                 if name not in columns:
                     connection.execute(f"ALTER TABLE accounts ADD COLUMN {name} {definition}")
+            transaction_columns = {
+                row["name"] for row in connection.execute("PRAGMA table_info(ledger_transactions)")
+            }
+            if "idempotency_key" not in transaction_columns:
+                connection.execute("ALTER TABLE ledger_transactions ADD COLUMN idempotency_key TEXT")
+            connection.execute(
+                """CREATE UNIQUE INDEX IF NOT EXISTS idx_ledger_transactions_idempotency
+                   ON ledger_transactions(user_id, idempotency_key)
+                   WHERE idempotency_key IS NOT NULL"""
+            )
+            review_columns = {
+                row["name"] for row in connection.execute("PRAGMA table_info(ledger_reviews)")
+            }
+            if "idempotency_key" not in review_columns:
+                connection.execute("ALTER TABLE ledger_reviews ADD COLUMN idempotency_key TEXT")
+            connection.execute(
+                """CREATE UNIQUE INDEX IF NOT EXISTS idx_ledger_reviews_idempotency
+                   ON ledger_reviews(user_id, idempotency_key)
+                   WHERE idempotency_key IS NOT NULL"""
+            )
 
     def create_account(self, display_name: str, email: str, password_hash: str,
                        shop_name: str = "My Kirana Store", phone: str | None = None,
@@ -227,29 +249,59 @@ class Ledger:
     def add_transaction(self, *, user_id: int, customer_name: str, amount_rupees: int,
                         transaction_type: str, due_day: str | None,
                         context: str | None, transcript: str,
-                        happened_on: str | None = None) -> dict:
+                        happened_on: str | None = None,
+                        idempotency_key: str | None = None) -> dict:
         customer = self.get_or_create_customer(user_id, customer_name)
         with self.connect() as connection:
-            cursor = connection.execute(
-                """INSERT INTO ledger_transactions
-                   (user_id, customer_id, amount_rupees, transaction_type, due_day, context, transcript, happened_on)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
-                (user_id, customer["id"], amount_rupees, transaction_type, due_day, context,
-                 transcript, happened_on or date.today().isoformat()),
-            )
+            try:
+                cursor = connection.execute(
+                    """INSERT INTO ledger_transactions
+                       (user_id, customer_id, amount_rupees, transaction_type, due_day, context,
+                        transcript, happened_on, idempotency_key)
+                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                    (user_id, customer["id"], amount_rupees, transaction_type, due_day, context,
+                     transcript, happened_on or date.today().isoformat(), idempotency_key),
+                )
+                transaction_id = cursor.lastrowid
+                duplicate = False
+            except sqlite3.IntegrityError:
+                if not idempotency_key:
+                    raise
+                existing = connection.execute(
+                    "SELECT id FROM ledger_transactions WHERE user_id=? AND idempotency_key=?",
+                    (user_id, idempotency_key),
+                ).fetchone()
+                if not existing:
+                    raise
+                transaction_id = existing["id"]
+                duplicate = True
             row = connection.execute(
                 """SELECT t.*, c.name AS customer_name FROM ledger_transactions t
                    JOIN ledger_customers c ON c.id=t.customer_id WHERE t.id=? AND t.user_id=?""",
-                (cursor.lastrowid, user_id),
+                (transaction_id, user_id),
             ).fetchone()
-        return dict(row)
+        result = dict(row)
+        result["deduplicated"] = duplicate
+        return result
 
-    def add_review(self, user_id: int, transcript: str, extracted_json: str, reason: str) -> None:
+    def add_review(self, user_id: int, transcript: str, extracted_json: str, reason: str,
+                   idempotency_key: str | None = None) -> bool:
         with self.connect() as connection:
-            connection.execute(
-                "INSERT INTO ledger_reviews(user_id, transcript, extracted_json, reason) VALUES (?,?,?,?)",
-                (user_id, transcript, extracted_json, reason),
-            )
+            try:
+                connection.execute(
+                    """INSERT INTO ledger_reviews
+                       (user_id, transcript, extracted_json, reason, idempotency_key)
+                       VALUES (?,?,?,?,?)""",
+                    (user_id, transcript, extracted_json, reason, idempotency_key),
+                )
+                return True
+            except sqlite3.IntegrityError:
+                if idempotency_key and connection.execute(
+                    "SELECT 1 FROM ledger_reviews WHERE user_id=? AND idempotency_key=?",
+                    (user_id, idempotency_key),
+                ).fetchone():
+                    return False
+                raise
 
     def review_rows(self, user_id: int) -> list[dict]:
         with self.connect() as connection:

@@ -22,6 +22,7 @@ class NoteResponse(BaseModel):
     matched_customer: str | None = None
     transcription_provider: str
     extraction_provider: str
+    deduplicated: bool = False
 
 
 class RegisterRequest(BaseModel):
