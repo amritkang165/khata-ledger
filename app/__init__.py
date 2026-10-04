@@ -1,0 +1,2 @@
+"""Khata Ledger application package."""
+
