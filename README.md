@@ -9,6 +9,7 @@ This is a runnable vertical slice with local ledger storage, synthetic-only Atla
 ## What works now
 
 - `POST /api/note` accepts an audio upload or a development-only transcript.
+- The browser can record a voice note directly from the device microphone.
 - Audio is sent directly to ElevenLabs Scribe v2 and is not persisted by this app.
 - Gemma 3 produces schema-constrained JSON through Ollama.
 - A deterministic local parser keeps the demo usable when Ollama is unavailable and reports that fallback in the response.
@@ -18,6 +19,7 @@ This is a runnable vertical slice with local ledger storage, synthetic-only Atla
 - Local accounts use PBKDF2 password hashing and server-side, expiring sessions; every ledger query is scoped to the signed-in owner.
 - `GET /api/brief` returns outstanding totals, repayment patterns, age, and Hinglish collection messages.
 - The single-page UI shows note processing, the ledger, and the collection brief.
+- Low-confidence notes appear in an owner-only correction queue; transaction history can be inspected and incorrect entries deleted.
 - Sentry spans record the model, system prompt, latency, token usage, and a `parse_failure` tag when configured. Parsed financial output is redacted by default.
 - Atlas Vector Search retrieves only explicitly synthetic repayment profiles; no real ledger row is uploaded.
 - A 10-step Tinker LoRA fine-tune on Qwen 3.5 4B improved held-out synthetic transaction-direction extraction from 80% to 100% (40 examples). Amount, customer, and valid-JSON accuracy remained 100%.
@@ -76,8 +78,11 @@ The financial system of record is SQLite. The app does not store uploaded audio.
 
 ## API
 
+- `POST /api/auth/register`, `POST /api/auth/login`, `POST /api/auth/logout`, `GET /api/auth/me`
 - `POST /api/note`: multipart form with either `audio` or `transcript`
 - `GET /api/ledger`: current per-customer balances
+- `GET /api/transactions`, `DELETE /api/transactions/{id}`: owner-scoped history and correction
+- `GET /api/reviews`, `POST /api/reviews/{id}/approve`, `DELETE /api/reviews/{id}`
 - `GET /api/brief`: weekly collection brief
 - `GET /api/health`: service and model configuration
 

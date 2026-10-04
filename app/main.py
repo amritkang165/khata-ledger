@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -21,7 +22,7 @@ from app.db.sqlite import Ledger
 from app.pipeline.extract import extract_entry
 from app.pipeline.match import match_customer
 from app.pipeline.transcribe import TranscriptionError, transcribe_audio
-from app.schemas import LoginRequest, NoteResponse, RegisterRequest, UserResponse
+from app.schemas import ExtractedEntry, LoginRequest, NoteResponse, RegisterRequest, UserResponse
 
 try:
     import sentry_sdk
@@ -32,6 +33,7 @@ except ImportError:
 ledger = Ledger(settings.db_path)
 UI_DIR = Path(__file__).parent / "ui"
 SESSION_COOKIE = "khata_session"
+MAX_AUDIO_BYTES = 10 * 1024 * 1024
 
 
 @asynccontextmanager
@@ -132,6 +134,47 @@ def get_ledger(user: dict = Depends(current_user)):
     return {"customers": ledger.ledger_rows(user["id"])}
 
 
+@app.get("/api/transactions")
+def get_transactions(user: dict = Depends(current_user)):
+    return {"transactions": list(reversed(ledger.transaction_history(user["id"])))}
+
+
+@app.delete("/api/transactions/{transaction_id}", status_code=204)
+def delete_transaction(transaction_id: int, user: dict = Depends(current_user)):
+    if not ledger.delete_transaction(user["id"], transaction_id):
+        raise HTTPException(status_code=404, detail="Transaction not found")
+
+
+@app.get("/api/reviews")
+def get_reviews(user: dict = Depends(current_user)):
+    rows = ledger.review_rows(user["id"])
+    for row in rows:
+        row["extracted"] = json.loads(row.pop("extracted_json"))
+    return {"reviews": rows}
+
+
+@app.post("/api/reviews/{review_id}/approve")
+def approve_review(review_id: int, entry: ExtractedEntry, user: dict = Depends(current_user)):
+    if entry.amount_rupees is None:
+        raise HTTPException(status_code=422, detail="Enter an amount before adding this entry")
+    if not any(row["id"] == review_id for row in ledger.review_rows(user["id"])):
+        raise HTTPException(status_code=404, detail="Review not found")
+    matched_name, _score = match_customer(entry.customer_name, ledger.customer_names(user["id"]))
+    transaction = ledger.add_transaction(
+        user_id=user["id"], customer_name=matched_name, amount_rupees=entry.amount_rupees,
+        transaction_type=entry.transaction_type, due_day=entry.due_day,
+        context=entry.context, transcript="approved after manual review",
+    )
+    ledger.delete_review(user["id"], review_id)
+    return {"status": "inserted", "transaction": transaction}
+
+
+@app.delete("/api/reviews/{review_id}", status_code=204)
+def reject_review(review_id: int, user: dict = Depends(current_user)):
+    if not ledger.delete_review(user["id"], review_id):
+        raise HTTPException(status_code=404, detail="Review not found")
+
+
 @app.get("/api/brief")
 def get_brief(user: dict = Depends(current_user)):
     return build_weekly_brief(ledger, user["id"])
@@ -161,8 +204,11 @@ async def post_note(
         transcription_provider = "manual-demo-input"
     elif audio:
         try:
+            content = await audio.read(MAX_AUDIO_BYTES + 1)
+            if len(content) > MAX_AUDIO_BYTES:
+                raise HTTPException(status_code=413, detail="Voice note must be 10 MB or smaller")
             text = await transcribe_audio(
-                audio.filename or "note.webm", await audio.read(), audio.content_type or "audio/webm", settings
+                audio.filename or "note.webm", content, audio.content_type or "audio/webm", settings
             )
         except TranscriptionError as exc:
             raise HTTPException(status_code=503, detail=str(exc)) from exc

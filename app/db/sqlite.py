@@ -227,6 +227,22 @@ class Ledger:
                 (user_id, transcript, extracted_json, reason),
             )
 
+    def review_rows(self, user_id: int) -> list[dict]:
+        with self.connect() as connection:
+            rows = connection.execute(
+                """SELECT id, transcript, extracted_json, reason, created_at
+                   FROM ledger_reviews WHERE user_id=? ORDER BY id DESC""",
+                (user_id,),
+            ).fetchall()
+        return [dict(row) for row in rows]
+
+    def delete_review(self, user_id: int, review_id: int) -> bool:
+        with self.connect() as connection:
+            cursor = connection.execute(
+                "DELETE FROM ledger_reviews WHERE id=? AND user_id=?", (review_id, user_id)
+            )
+        return cursor.rowcount == 1
+
     def ledger_rows(self, user_id: int) -> list[dict]:
         with self.connect() as connection:
             rows = connection.execute(
@@ -251,3 +267,18 @@ class Ledger:
                 (user_id,),
             ).fetchall()
         return [dict(row) for row in rows]
+
+    def delete_transaction(self, user_id: int, transaction_id: int) -> bool:
+        with self.connect() as connection:
+            cursor = connection.execute(
+                "DELETE FROM ledger_transactions WHERE id=? AND user_id=?", (transaction_id, user_id)
+            )
+            if cursor.rowcount:
+                connection.execute(
+                    """DELETE FROM ledger_customers
+                       WHERE user_id=? AND NOT EXISTS (
+                         SELECT 1 FROM ledger_transactions t WHERE t.customer_id=ledger_customers.id
+                       )""",
+                    (user_id,),
+                )
+        return cursor.rowcount == 1
