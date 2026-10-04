@@ -7,7 +7,28 @@
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-  <header><div><span class="eyebrow">LOCAL-FIRST · VOICE-FIRST</span><h1>Khata Ledger</h1><p>Bol ke likho. Hisaab machine par hi rahega.</p></div><div class="privacy">☁️ Audio → transcription only<br>🔒 Every rupee stays local</div></header>
+  <main id="auth-view" class="auth-shell hidden">
+    <section class="card auth-card">
+      <span class="eyebrow">LOCAL-FIRST · VOICE-FIRST</span>
+      <h1>Khata Ledger</h1>
+      <p class="muted">Sign in to your private ledger.</p>
+      <form id="login-form">
+        <label>Email<input name="email" type="email" autocomplete="email" required></label>
+        <label>Password<input name="password" type="password" autocomplete="current-password" required></label>
+        <button type="submit">Sign in</button>
+      </form>
+      <div class="auth-divider">New shop?</div>
+      <form id="register-form">
+        <label>Your name<input name="display_name" autocomplete="name" required maxlength="80"></label>
+        <label>Email<input name="email" type="email" autocomplete="email" required></label>
+        <label>Password<input name="password" type="password" autocomplete="new-password" required minlength="8"></label>
+        <button type="submit" class="secondary">Create private ledger</button>
+      </form>
+      <p id="auth-error" class="error hidden"></p>
+    </section>
+  </main>
+  <div id="app-view" class="hidden">
+  <header><div><span class="eyebrow">LOCAL-FIRST · VOICE-FIRST</span><h1>Khata Ledger</h1><p>Bol ke likho. Hisaab machine par hi rahega.</p></div><div><div class="privacy">☁️ Audio → transcription only<br>🔒 Every rupee stays local</div><p class="account"><span id="account-name"></span> · <button id="logout" class="link-button">Sign out</button></p></div></header>
   <main>
     <section class="capture card">
       <h2>New voice note</h2>
@@ -22,9 +43,9 @@
     </section>
     <section class="card"><div class="section-head"><h2>Current ledger</h2><button class="secondary" id="refresh">Refresh</button></div><div class="table-wrap"><table><thead><tr><th>Customer</th><th>Outstanding</th><th>Last activity</th><th>Entries</th></tr></thead><tbody id="ledger"></tbody></table></div></section>
     <section class="brief card"><div class="section-head"><div><span class="eyebrow">MONDAY COLLECTION BRIEF</span><h2 id="brief-total">Loading…</h2></div></div><div id="brief-list" class="brief-grid"></div></section>
-    <section class="card"><div class="section-head"><div><span class="eyebrow">ATLAS VECTOR SEARCH · SYNTHETIC ONLY</span><h2>Similar repayment patterns</h2></div></div><p class="muted">This panel queries synthetic profiles only. Real customers and the SQLite ledger are never uploaded.</p><div class="similar-controls"><select id="similar-profile"><option value="SYN-001">Asha · school expenses</option><option value="SYN-002">Bharat · ration installments</option><option value="SYN-004">Danish · festival delays</option><option value="SYN-005">Ekta · medicine</option></select><button id="find-similar">Find similar</button></div><div id="similar-list" class="brief-grid"></div></section>
   </main>
   <footer>Transcription is cloud for dialect accuracy; every rupee of data stays on this machine.</footer>
+  </div>
   <script src="/static/app.js"></script>
 </body>
 </html>

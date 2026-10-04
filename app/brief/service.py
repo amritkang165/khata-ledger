@@ -6,13 +6,13 @@ from datetime import date
 from app.db.sqlite import Ledger
 
 
-def build_weekly_brief(ledger: Ledger) -> dict:
+def build_weekly_brief(ledger: Ledger, user_id: int) -> dict:
     histories = defaultdict(list)
-    for transaction in ledger.transaction_history():
+    for transaction in ledger.transaction_history(user_id):
         histories[transaction["customer_name"]].append(transaction)
 
     entries = []
-    for row in ledger.ledger_rows():
+    for row in ledger.ledger_rows(user_id):
         if row["outstanding_rupees"] <= 0:
             continue
         transactions = histories[row["name"]]

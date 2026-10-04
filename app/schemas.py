@@ -23,3 +23,19 @@ class NoteResponse(BaseModel):
     transcription_provider: str
     extraction_provider: str
 
+
+class RegisterRequest(BaseModel):
+    display_name: str = Field(min_length=1, max_length=80)
+    email: str = Field(min_length=3, max_length=254)
+    password: str = Field(min_length=8, max_length=256)
+
+
+class LoginRequest(BaseModel):
+    email: str = Field(min_length=3, max_length=254)
+    password: str = Field(min_length=1, max_length=256)
+
+
+class UserResponse(BaseModel):
+    id: int
+    display_name: str
+    email: str

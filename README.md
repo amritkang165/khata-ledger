@@ -15,6 +15,7 @@ This is a runnable vertical slice with local ledger storage, synthetic-only Atla
 - Entries below `0.6` confidence, or with no amount, go to `pending_reviews` and never touch the ledger.
 - Customer names are fuzzy-matched, including common honorifics such as “bhai” and “ji”.
 - SQLite starts empty and records only notes entered by the shopkeeper.
+- Local accounts use PBKDF2 password hashing and server-side, expiring sessions; every ledger query is scoped to the signed-in owner.
 - `GET /api/brief` returns outstanding totals, repayment patterns, age, and Hinglish collection messages.
 - The single-page UI shows note processing, the ledger, and the collection brief.
 - Sentry spans record the model, system prompt, latency, token usage, and a `parse_failure` tag when configured. Parsed financial output is redacted by default.
@@ -33,6 +34,8 @@ uv sync --extra dev --extra experiment
 ```
 
 Open <http://localhost:8000>. Environment variables are read from the shell; either export `.env` values or use your preferred dotenv runner. Without an ElevenLabs key, the manual transcript box still exercises extraction, matching, review gating, SQLite, and the brief.
+
+Create the first account in the browser. On an installation upgraded from the earlier single-user build, that first account safely claims the existing local ledger entries. Later accounts always start with an empty, isolated ledger.
 
 Try:
 

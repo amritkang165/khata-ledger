@@ -25,6 +25,7 @@ class Settings:
     atlas_database: str = os.getenv("ATLAS_DATABASE", "khata_patterns")
     atlas_collection: str = os.getenv("ATLAS_COLLECTION", "synthetic_customer_patterns")
     atlas_vector_index: str = os.getenv("ATLAS_VECTOR_INDEX", "pattern_vector_index")
+    session_cookie_secure: bool = os.getenv("SESSION_COOKIE_SECURE", "false").lower() == "true"
 
 
 settings = Settings()
