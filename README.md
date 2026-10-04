@@ -76,6 +76,21 @@ browser <──API response── FastAPI ──> local Gemma/Ollama ──> SQL
 
 The financial system of record is SQLite. The app does not store uploaded audio. Manual transcript input exists only for development and judging resilience. Sentry is disabled unless `SENTRY_DSN` is set, and financial output is redacted from traces by default. `ALLOW_SYNTHETIC_TRACE_DATA=true` may be used only with the repository's synthetic demo notes to capture judging evidence. Atlas contains synthetic pattern documents only—never the real ledger or customer PII.
 
+## Why authentication is local by design
+
+Khata Ledger deliberately keeps authentication beside the ledger instead of making a hosted identity service such as Supabase or Firebase a requirement. The person this is built for may have unreliable connectivity, and signing in should never become the reason he cannot check who owes him money.
+
+Accounts, sessions, and financial records live in the same local SQLite database under the shopkeeper's control. Passwords are protected with salted PBKDF2-SHA256 hashes, raw session tokens are never stored, sessions expire on the server, and every ledger query is scoped to the authenticated account. An `HttpOnly`, `SameSite=Strict` cookie connects the browser to that session.
+
+This choice gives the product four valuable properties:
+
+- **Offline resilience:** returning users can access the locally running product without depending on a cloud authentication provider.
+- **One privacy boundary:** identity and rupee-level records do not need to be copied into separate cloud systems.
+- **Portable ownership:** the database can be backed up, moved, or self-hosted without exporting data from a vendor.
+- **Low operating cost:** a small shop does not acquire another metered service just to protect its own ledger.
+
+Hosted authentication would be a strong fit for a conventional internet-first SaaS. For this local-first product, authentication is part of the privacy architecture rather than an external prerequisite.
+
 ## API
 
 - `POST /api/auth/register`, `POST /api/auth/login`, `POST /api/auth/logout`, `GET /api/auth/me`
