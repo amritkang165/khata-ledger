@@ -21,6 +21,8 @@ button { cursor: pointer; }
 .hidden { display: none !important; }
 .overline { margin: 0 0 .45rem; color: var(--orange); font-size: .7rem; font-weight: 850; letter-spacing: .15em; }
 .subtext { color: var(--muted); line-height: 1.55; }
+.brand-mark { width: 46px; height: 46px; display: grid; place-items: center; flex: 0 0 auto; border: 1px solid #e8b56e; border-radius: 5px; color: var(--olive); background: var(--orange); font: 800 1.55rem Georgia, serif; box-shadow: 3px 3px 0 #4c4d3b; transform: rotate(-2deg); }
+.brand-mark.large { width: 64px; height: 64px; margin-bottom: 2.5rem; font-size: 2.1rem; box-shadow: 5px 5px 0 #4c4d3b; }
 
 /* Sign in and shop setup */
 .auth-page { min-height: 100vh; display: grid; grid-template-columns: minmax(360px, .9fr) minmax(520px, 1.1fr); }
@@ -48,6 +50,7 @@ input:focus, select:focus, textarea:focus { border-color: var(--green); box-shad
 
 /* Shop shell */
 .app-header { display: grid; grid-template-columns: minmax(260px, 1fr) auto minmax(260px, 1fr); align-items: center; gap: 2rem; padding: 1.2rem max(4vw, 1.5rem); color: white; background: var(--olive); }
+.header-shop { display: flex; align-items: center; gap: .9rem; }
 .header-shop h1 { margin: 0; font-size: clamp(1.55rem, 3vw, 2.25rem); }
 .header-shop p:not(.overline) { margin: .15rem 0 0; color: #d8d4c7; font-size: .75rem; }
 .desktop-nav { display: flex; align-items: center; gap: .25rem; }
