@@ -71,6 +71,13 @@ input:focus, select:focus, textarea:focus { border-color: var(--green); box-shad
 .privacy-badge div { display: grid; font-size: .75rem; }
 .privacy-badge small { margin-top: .12rem; color: var(--muted); }
 
+/* A small hand drawn kiryana scene anchors the working screen in a real shop. */
+.shop-scene { position: relative; overflow: hidden; border: 1px solid #c9c0a7; background: #e8e4cf; box-shadow: 4px 4px 0 #d2c7aa; animation: scene-arrive .55s ease-out both; }
+.scene-caption { position: absolute; z-index: 1; top: .65rem; left: .8rem; display: flex; align-items: center; gap: .45rem; color: #5d5848; font-size: .65rem; font-weight: 700; letter-spacing: .035em; }
+.scene-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+.kirana-art { display: block; width: 100%; height: clamp(118px, 18vw, 205px); }
+.kirana-art [fill="#d7b578"] { animation: jar-glint 5s ease-in-out 1s infinite; }
+
 .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); background: var(--card); box-shadow: 4px 4px 0 #d2c7aa; }
 .stat-card { padding: 1.15rem 1.25rem; border-right: 1px solid var(--line); }
 .stat-card:last-child { border: 0; }
@@ -90,8 +97,19 @@ input:focus, select:focus, textarea:focus { border-color: var(--green); box-shad
 .record-button { display: flex; align-items: center; gap: .9rem; width: 100%; padding: 1rem; border: 1px solid #b9b39e; border-radius: 4px; color: var(--ink); background: #f2eddd; text-align: left; }
 .record-button:hover { border-color: var(--red); }
 .record-button .mic { width: 42px; height: 42px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; color: white; background: var(--red); }
-.record-button > span:last-child { display: grid; gap: .15rem; }
+.record-copy { display: grid; gap: .15rem; }
 .record-button small { color: var(--muted); font-size: .7rem; font-weight: 500; }
+.voice-meter { height: 30px; display: flex; align-items: center; gap: 3px; margin-left: auto; opacity: .35; }
+.voice-meter i { width: 3px; height: 5px; border-radius: 2px; background: var(--green); transform: scaleY(.7); }
+.record-button.is-recording { border-color: var(--red); background: #f7e6df; }
+.record-button.is-recording .mic { animation: mic-pulse 1.7s ease-out infinite; }
+.record-button.is-recording .voice-meter { opacity: 1; }
+.record-button.is-recording .voice-meter i { animation: voice-bar .75s ease-in-out infinite alternate; }
+.record-button.is-recording .voice-meter i:nth-child(3n) { animation-duration: .58s; }
+.record-button.is-recording .voice-meter i:nth-child(3n + 1) { animation-duration: .92s; }
+.record-button.is-recording .voice-meter i:nth-child(4n) { animation-delay: -.35s; }
+.record-button.has-recording .voice-meter { opacity: .8; }
+.record-button.has-recording .voice-meter i { height: 12px; opacity: .7; }
 .file-row { display: flex; align-items: center; gap: 1rem; padding: .7rem .8rem; border: 1px dashed #c8c0a8; color: var(--muted); background: #f7f2e4; }
 .file-row > span { min-width: 135px; }
 .file-row input { padding: 0; border: 0; background: transparent; font-size: .72rem; }
@@ -133,6 +151,15 @@ tbody tr:hover { background: #f5efdf; }
 .review-actions { display: flex; gap: .5rem; }
 footer { padding: 1.8rem; color: #e5e0d2; background: var(--olive); text-align: center; font-size: .76rem; }
 
+@keyframes voice-bar { from { transform: scaleY(.65); } to { transform: scaleY(3.1); } }
+@keyframes mic-pulse { 0% { box-shadow: 0 0 0 0 #c84a2f55; } 75%, 100% { box-shadow: 0 0 0 11px #c84a2f00; } }
+@keyframes scene-arrive { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes jar-glint { 0%, 85%, 100% { filter: brightness(1); } 90% { filter: brightness(1.12); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+
 @media (max-width: 1000px) {
   .app-header { grid-template-columns: 1fr auto; }
   .desktop-nav { display: none; }
@@ -154,6 +181,8 @@ footer { padding: 1.8rem; color: #e5e0d2; background: var(--olive); text-align: 
   .stat-card:nth-child(2) { border-right: 0; }
   .stat-card:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
   .dashboard { padding: 1rem; }
+  .shop-scene { margin: 0 -.1rem; }
+  .kirana-art { height: 125px; }
 }
 
 @media (max-width: 520px) {

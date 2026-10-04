@@ -76,8 +76,20 @@ form.addEventListener('submit', async event => {
   result.classList.remove('hidden'); result.textContent = 'Processing note…';
   const response = await api('/api/note', {method:'POST', body:data});
   const body = await response.json();
-  result.textContent = response.ok ? `${body.status === 'inserted' ? '✓ Added' : '⚠ Needs review'}\n\nTranscript\n${body.transcript}\n\nExtracted\n${JSON.stringify(body.extracted, null, 2)}\n\n${body.transcription_provider} → ${body.extraction_provider}` : `Error: ${body.detail || response.statusText}`;
-  if (response.ok) await refresh();
+  if (response.ok) {
+    const entry = body.extracted;
+    const isPayment = entry.transaction_type === 'credit_paid';
+    const amount = entry.amount_rupees ? rupees.format(entry.amount_rupees) : 'amount not clear';
+    result.textContent = body.status === 'inserted'
+      ? `✓ ${isPayment ? 'Payment recorded' : 'Added to khata'}\n${body.matched_customer || entry.customer_name} · ${amount}${entry.due_day ? ` · due ${entry.due_day}` : ''}\n\nHeard: “${body.transcript}”`
+      : `Please check this note before it is saved\n${entry.customer_name || 'Customer unclear'} · ${amount}\n\nHeard: “${body.transcript}”`;
+    recordedAudio = null;
+    document.querySelector('#audio').value = '';
+    if (body.status === 'inserted') document.querySelector('#transcript').value = '';
+    await refresh();
+  } else {
+    result.textContent = `Could not add this note\n${body.detail || response.statusText}`;
+  }
 });
 document.querySelector('#refresh').addEventListener('click', refresh);
 
@@ -85,6 +97,7 @@ document.querySelector('#record').addEventListener('click', async event => {
   const status = document.querySelector('#record-status');
   if (mediaRecorder?.state === 'recording') {
     mediaRecorder.stop();
+    event.currentTarget.classList.remove('is-recording');
     event.currentTarget.querySelector('.mic').textContent = '🎙';
     event.currentTarget.querySelector('b').textContent = 'Start voice note';
     return;
@@ -98,13 +111,29 @@ document.querySelector('#record').addEventListener('click', async event => {
       recordedAudio = new File([new Blob(chunks, {type: mediaRecorder.mimeType})], 'voice-note.webm', {type: mediaRecorder.mimeType});
       recordingStream.getTracks().forEach(track => track.stop());
       status.textContent = '✓ Recording ready';
+      document.querySelector('#record').classList.add('has-recording');
     });
     mediaRecorder.start();
+    recordedAudio = null;
+    event.currentTarget.classList.add('is-recording');
+    event.currentTarget.classList.remove('has-recording');
     event.currentTarget.querySelector('.mic').textContent = '■';
     event.currentTarget.querySelector('b').textContent = 'Stop recording';
     status.textContent = 'Recording…';
   } catch (_error) {
     status.textContent = 'Microphone permission was not granted.';
+  }
+});
+
+document.querySelector('#audio').addEventListener('change', () => {
+  recordedAudio = null;
+  document.querySelector('#record').classList.remove('has-recording');
+});
+
+document.querySelector('#transcript').addEventListener('input', () => {
+  if (document.querySelector('#transcript').value.trim()) {
+    recordedAudio = null;
+    document.querySelector('#record').classList.remove('has-recording');
   }
 });
 
