@@ -29,6 +29,8 @@ button { cursor: pointer; }
 .auth-story { display: flex; flex-direction: column; justify-content: center; padding: clamp(3rem, 7vw, 7rem); color: white; background: var(--olive); }
 .auth-story h1 { margin: .8rem 0 1.2rem; font-size: clamp(4.5rem, 9vw, 8rem); line-height: .78; letter-spacing: -.05em; }
 .story-copy { color: #eeeadf; font-size: 1.15rem; }
+.login-shop-art { display: block; width: min(100%, 440px); height: auto; margin: 1rem 0 .25rem; overflow: visible; animation: scene-arrive .55s ease-out both; }
+.login-hanging-board { transform-box: fill-box; transform-origin: 50% 0; animation: sign-sway 5.5s ease-in-out .8s infinite; }
 .privacy-note { max-width: 360px; margin-top: 2.5rem; padding: 1rem; border: 1px solid #66624f; color: #ded9ca; line-height: 1.5; }
 .auth-window { align-self: center; width: min(620px, calc(100% - 3rem)); margin: 3rem auto; padding: clamp(1.5rem, 4vw, 3rem); border: 1px solid var(--line); background: var(--card); box-shadow: var(--shadow); }
 .auth-tabs { display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 2rem; border: 1px solid var(--line); }
@@ -155,6 +157,7 @@ footer { padding: 1.8rem; color: #e5e0d2; background: var(--olive); text-align: 
 @keyframes mic-pulse { 0% { box-shadow: 0 0 0 0 #c84a2f55; } 75%, 100% { box-shadow: 0 0 0 11px #c84a2f00; } }
 @keyframes scene-arrive { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes jar-glint { 0%, 85%, 100% { filter: brightness(1); } 90% { filter: brightness(1.12); } }
+@keyframes sign-sway { 0%, 84%, 100% { transform: rotate(0); } 89% { transform: rotate(2deg); } 94% { transform: rotate(-1.2deg); } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
@@ -170,6 +173,7 @@ footer { padding: 1.8rem; color: #e5e0d2; background: var(--olive); text-align: 
   .auth-page { grid-template-columns: 1fr; }
   .auth-story { min-height: 280px; padding: 2rem 1.5rem; }
   .auth-story h1 { font-size: 4.6rem; }
+  .login-shop-art { width: min(100%, 360px); max-height: 120px; margin-top: .25rem; }
   .privacy-note { display: none; }
   .auth-window { width: calc(100% - 1.5rem); margin: -.8rem auto 1rem; padding: 1.25rem; }
   .app-header { display: flex; flex-wrap: wrap; gap: .8rem; }
