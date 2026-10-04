@@ -17,8 +17,31 @@ function showAuth(message = '') {
   appView.classList.add('hidden');
   authView.classList.remove('hidden');
   const error = document.querySelector('#auth-error');
-  error.textContent = message;
-  error.classList.toggle('hidden', !message);
+  error.textContent = typeof message === 'string' ? message : 'Please check the information and try again.';
+  error.classList.toggle('hidden', !error.textContent);
+}
+
+function formatApiError(body) {
+  const detail = body?.detail;
+  if (typeof detail === 'string') return detail;
+  if (Array.isArray(detail)) {
+    const labels = {
+      shop_name: 'Shop name', display_name: 'Owner name', phone: 'Mobile number',
+      city: 'Town or city', preferred_language: 'Working language', email: 'Email address',
+      password: 'Password'
+    };
+    return detail.map(item => {
+      if (typeof item === 'string') return item;
+      const field = Array.isArray(item.loc) ? item.loc.at(-1) : null;
+      if (field === 'password' && /at least 8 characters/i.test(item.msg || '')) {
+        return 'Password must contain at least 8 characters.';
+      }
+      const label = labels[field];
+      const message = String(item.msg || 'Please check this field.').replace(/^Value error, /, '');
+      return label ? `${label}: ${message}` : message;
+    }).join(' ');
+  }
+  return typeof body?.message === 'string' ? body.message : 'Please check the information and try again.';
 }
 
 async function showApp(user) {
@@ -193,7 +216,7 @@ for (const [formId, endpoint] of [['login-form', '/api/auth/login'], ['register-
       method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload)
     });
     const body = await response.json();
-    if (!response.ok) { showAuth(body.detail || 'Unable to continue'); return; }
+    if (!response.ok) { showAuth(formatApiError(body)); return; }
     event.currentTarget.reset();
     await showApp(body);
   });
