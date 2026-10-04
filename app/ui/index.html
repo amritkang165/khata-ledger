@@ -10,16 +10,10 @@
 <body>
   <main id="auth-view" class="auth-page hidden">
     <section class="auth-story">
-      <div class="app-logo large">KL</div>
-      <p class="overline">VOICE-FIRST CREDIT BOOK</p>
-      <h1>Your shop's khata,<br>without the paperwork.</h1>
-      <p class="story-copy">Speak naturally in Hindi or English. Khata Ledger records credit, tracks repayments, and prepares the next collection list.</p>
-      <div class="proof-list">
-        <div><b>01</b><span>Speak a customer note</span></div>
-        <div><b>02</b><span>Review the amount and due date</span></div>
-        <div><b>03</b><span>Follow up from one private ledger</span></div>
-      </div>
-      <p class="privacy-note">🔒 Accounts and financial records remain in your local database.</p>
+      <p class="overline">LOCAL-FIRST · VOICE-FIRST</p>
+      <h1>Khata<br>Ledger</h1>
+      <p class="story-copy">Bol ke likho. Hisaab machine par hi rahega.</p>
+      <p class="privacy-note">Accounts and financial records remain in your local database.</p>
     </section>
 
     <section class="auth-window">
@@ -63,8 +57,7 @@
   <div id="app-view" class="hidden">
     <header class="app-header">
       <div class="header-shop">
-        <div class="app-logo">KL</div>
-        <div><h1 id="shop-name">My Kirana Store</h1><p id="shop-location">Private shop ledger</p></div>
+        <div><p class="overline">KHATA LEDGER</p><h1 id="shop-name">My Kirana Store</h1><p id="shop-location">Private shop ledger</p></div>
       </div>
       <nav class="desktop-nav" aria-label="Main navigation">
         <a href="#overview" class="active">Overview</a><a href="#new-entry">New entry</a><a href="#customers">Customers</a><a href="#passbook">Passbook</a>
@@ -74,8 +67,8 @@
 
     <main class="dashboard" id="overview">
       <section class="page-heading">
-        <div><p class="overline">SHOP OVERVIEW</p><h2>Namaste, <span id="owner-greeting">shopkeeper</span> ji</h2><p id="today-date">Your daily ledger at a glance</p></div>
-        <div class="privacy-badge"><span>🔒</span><div><b>Private by design</b><small>Rupee-level data stays local</small></div></div>
+        <div><p class="overline">AAJ KA HISAAB</p><h2>Namaste, <span id="owner-greeting">shopkeeper</span> ji</h2><p id="today-date">Your daily ledger at a glance</p></div>
+        <div class="privacy-badge"><div><b>Every rupee stays local</b><small>Private shop ledger</small></div></div>
       </section>
 
       <section class="stats-grid" aria-label="Ledger summary">
@@ -87,7 +80,7 @@
 
       <section class="working-grid">
         <article class="card entry-card" id="new-entry">
-          <div class="section-title"><div><p class="overline">QUICK ENTRY</p><h2>Add a transaction</h2><p>Record a note exactly as you would say it across the counter.</p></div><span class="step-badge">Voice → ledger</span></div>
+          <div class="section-title"><div><p class="overline">NEW VOICE NOTE</p><h2>Add to khata</h2><p>Record a note exactly as you would say it across the counter.</p></div></div>
           <form id="note-form">
             <button type="button" id="record" class="record-button"><span class="mic">🎙</span><span><b>Start voice note</b><small id="record-status">Tap to begin recording</small></span></button>
             <label class="file-row"><span>Upload existing audio</span><input id="audio" name="audio" type="file" accept="audio/*"></label>
@@ -99,7 +92,7 @@
         </article>
 
         <article class="card brief-card">
-          <div class="section-title"><div><p class="overline">COLLECTION PLAN</p><h2 id="brief-total">₹0 to collect</h2><p>Prioritized from your repayment history.</p></div><span class="calendar-icon">📅</span></div>
+          <div class="section-title"><div><p class="overline">MONDAY COLLECTION BRIEF</p><h2 id="brief-total">₹0 to collect</h2><p>Prioritized from your repayment history.</p></div></div>
           <div id="brief-list" class="brief-list"></div>
         </article>
       </section>
@@ -116,7 +109,7 @@
         <div class="table-wrap"><table><thead><tr><th>Date</th><th>Customer</th><th>Entry type</th><th>Amount</th><th>Due note</th><th></th></tr></thead><tbody id="transactions"></tbody></table></div>
       </section>
     </main>
-    <footer><span>Khata Ledger</span><b>Transcription is cloud for dialect accuracy; every rupee of data stays on this machine.</b></footer>
+    <footer><b>Transcription is cloud for dialect accuracy; every rupee of data stays on this machine.</b></footer>
   </div>
   <script src="/static/app.js"></script>
 </body>
