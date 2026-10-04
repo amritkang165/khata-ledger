@@ -25,7 +25,11 @@ class NoteResponse(BaseModel):
 
 
 class RegisterRequest(BaseModel):
+    shop_name: str = Field(min_length=2, max_length=100)
     display_name: str = Field(min_length=1, max_length=80)
+    phone: str | None = Field(default=None, max_length=20)
+    city: str | None = Field(default=None, max_length=80)
+    preferred_language: Literal["Hinglish", "Hindi", "English"] = "Hinglish"
     email: str = Field(min_length=3, max_length=254)
     password: str = Field(min_length=8, max_length=256)
 
@@ -39,3 +43,7 @@ class UserResponse(BaseModel):
     id: int
     display_name: str
     email: str
+    shop_name: str
+    phone: str | None = None
+    city: str | None = None
+    preferred_language: str = "Hinglish"

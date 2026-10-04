@@ -23,6 +23,10 @@ function showAuth(message = '') {
 
 async function showApp(user) {
   document.querySelector('#account-name').textContent = user.display_name;
+  document.querySelector('#owner-greeting').textContent = user.display_name.split(' ')[0];
+  document.querySelector('#shop-name').textContent = user.shop_name;
+  document.querySelector('#shop-location').textContent = user.city ? `${user.city} · Private shop ledger` : 'Private shop ledger';
+  document.querySelector('#account-language').textContent = user.preferred_language;
   authView.classList.add('hidden');
   appView.classList.remove('hidden');
   await refresh();
@@ -37,6 +41,10 @@ async function refresh() {
     ? ledgerData.customers.map(row => `<tr><td>${escapeHtml(row.name)}</td><td class="money">${rupees.format(row.outstanding_rupees)}</td><td>${row.last_activity || '—'}</td><td>${row.transaction_count}</td></tr>`).join('')
     : '<tr><td colspan="4">Your ledger is empty. Add the first voice note above.</td></tr>';
   document.querySelector('#brief-total').textContent = `${rupees.format(brief.total_outstanding)} to collect`;
+  document.querySelector('#stat-outstanding').textContent = rupees.format(brief.total_outstanding);
+  document.querySelector('#stat-customers').textContent = ledgerData.customers.length;
+  document.querySelector('#stat-entries').textContent = history.transactions.length;
+  document.querySelector('#stat-reviews').textContent = reviewData.reviews.length;
   document.querySelector('#brief-list').innerHTML = brief.customers.length
     ? brief.customers.map(item => `<article class="brief-item"><h3>${escapeHtml(item.customer_name)} · ${rupees.format(item.outstanding_rupees)}</h3><p>${item.days_open} days open. ${escapeHtml(item.pattern_note)}</p><p class="message">“${escapeHtml(item.collection_message)}”</p></article>`).join('')
     : '<p>No outstanding credit yet.</p>';
@@ -73,7 +81,7 @@ document.querySelector('#record').addEventListener('click', async event => {
   const status = document.querySelector('#record-status');
   if (mediaRecorder?.state === 'recording') {
     mediaRecorder.stop();
-    event.currentTarget.textContent = '🎙 Start recording';
+    event.currentTarget.innerHTML = '<span>🎙</span><b>Start recording</b>';
     return;
   }
   try {
@@ -87,7 +95,7 @@ document.querySelector('#record').addEventListener('click', async event => {
       status.textContent = '✓ Recording ready';
     });
     mediaRecorder.start();
-    event.currentTarget.textContent = '■ Stop recording';
+    event.currentTarget.innerHTML = '<span>■</span><b>Stop recording</b>';
     status.textContent = 'Recording…';
   } catch (_error) {
     status.textContent = 'Microphone permission was not granted.';

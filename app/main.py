@@ -91,7 +91,10 @@ def register(payload: RegisterRequest, response: Response):
         password_hash = hash_password(payload.password)
     except AuthValidationError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
-    user = ledger.create_account(payload.display_name, email, password_hash)
+    user = ledger.create_account(
+        payload.display_name, email, password_hash, payload.shop_name,
+        payload.phone, payload.city, payload.preferred_language,
+    )
     if not user:
         raise HTTPException(status_code=409, detail="An account with this email already exists")
     ledger.claim_legacy_data_for_first_account(user["id"])
@@ -113,7 +116,9 @@ def login(payload: LoginRequest, response: Response):
     token = new_session_token()
     ledger.create_session(account["id"], session_token_hash(token))
     _set_session_cookie(response, token)
-    return {key: account[key] for key in ("id", "display_name", "email")}
+    return {key: account[key] for key in (
+        "id", "display_name", "email", "shop_name", "phone", "city", "preferred_language"
+    )}
 
 
 @app.post("/api/auth/logout", status_code=204)

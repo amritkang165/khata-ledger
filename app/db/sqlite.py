@@ -38,6 +38,10 @@ CREATE TABLE IF NOT EXISTS accounts (
     display_name TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE COLLATE NOCASE,
     password_hash TEXT NOT NULL,
+    shop_name TEXT NOT NULL DEFAULT 'My Kirana Store',
+    phone TEXT,
+    city TEXT,
+    preferred_language TEXT NOT NULL DEFAULT 'Hinglish',
     created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 CREATE TABLE IF NOT EXISTS auth_sessions (
@@ -102,25 +106,44 @@ class Ledger:
     def initialize(self) -> None:
         with self.connect() as connection:
             connection.executescript(SCHEMA)
+            columns = {row["name"] for row in connection.execute("PRAGMA table_info(accounts)")}
+            additions = {
+                "shop_name": "TEXT NOT NULL DEFAULT 'My Kirana Store'",
+                "phone": "TEXT",
+                "city": "TEXT",
+                "preferred_language": "TEXT NOT NULL DEFAULT 'Hinglish'",
+            }
+            for name, definition in additions.items():
+                if name not in columns:
+                    connection.execute(f"ALTER TABLE accounts ADD COLUMN {name} {definition}")
 
-    def create_account(self, display_name: str, email: str, password_hash: str) -> dict | None:
+    def create_account(self, display_name: str, email: str, password_hash: str,
+                       shop_name: str = "My Kirana Store", phone: str | None = None,
+                       city: str | None = None, preferred_language: str = "Hinglish") -> dict | None:
         with self.connect() as connection:
             try:
                 cursor = connection.execute(
-                    "INSERT INTO accounts(display_name, email, password_hash) VALUES (?,?,?)",
-                    (display_name.strip(), email, password_hash),
+                    """INSERT INTO accounts
+                       (display_name, email, password_hash, shop_name, phone, city, preferred_language)
+                       VALUES (?,?,?,?,?,?,?)""",
+                    (display_name.strip(), email, password_hash, shop_name.strip(),
+                     phone.strip() if phone else None, city.strip() if city else None,
+                     preferred_language),
                 )
             except sqlite3.IntegrityError:
                 return None
             row = connection.execute(
-                "SELECT id, display_name, email FROM accounts WHERE id=?", (cursor.lastrowid,)
+                """SELECT id, display_name, email, shop_name, phone, city, preferred_language
+                   FROM accounts WHERE id=?""",
+                (cursor.lastrowid,),
             ).fetchone()
         return dict(row)
 
     def account_by_email(self, email: str) -> dict | None:
         with self.connect() as connection:
             row = connection.execute(
-                "SELECT id, display_name, email, password_hash FROM accounts WHERE email=? COLLATE NOCASE",
+                """SELECT id, display_name, email, password_hash, shop_name, phone, city,
+                          preferred_language FROM accounts WHERE email=? COLLATE NOCASE""",
                 (email,),
             ).fetchone()
         return dict(row) if row else None
@@ -137,7 +160,8 @@ class Ledger:
     def account_for_session(self, token_hash: str) -> dict | None:
         with self.connect() as connection:
             row = connection.execute(
-                """SELECT a.id, a.display_name, a.email FROM auth_sessions s
+                """SELECT a.id, a.display_name, a.email, a.shop_name, a.phone, a.city,
+                          a.preferred_language FROM auth_sessions s
                    JOIN accounts a ON a.id=s.user_id
                    WHERE s.token_hash=? AND s.expires_at>?""",
                 (token_hash, datetime.now(UTC).isoformat()),

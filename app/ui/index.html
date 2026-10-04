@@ -3,51 +3,77 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173d2b">
   <title>Khata Ledger</title>
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-  <main id="auth-view" class="auth-shell hidden">
-    <section class="card auth-card">
-      <span class="eyebrow">LOCAL-FIRST · VOICE-FIRST</span>
-      <h1>Khata Ledger</h1>
-      <p class="muted">Sign in to your private ledger.</p>
-      <form id="login-form">
-        <label>Email<input name="email" type="email" autocomplete="email" required></label>
-        <label>Password<input name="password" type="password" autocomplete="current-password" required></label>
-        <button type="submit">Sign in</button>
-      </form>
-      <div class="auth-divider">New shop?</div>
-      <form id="register-form">
-        <label>Your name<input name="display_name" autocomplete="name" required maxlength="80"></label>
-        <label>Email<input name="email" type="email" autocomplete="email" required></label>
-        <label>Password<input name="password" type="password" autocomplete="new-password" required minlength="8"></label>
-        <button type="submit" class="secondary">Create private ledger</button>
-      </form>
-      <p id="auth-error" class="error hidden"></p>
+  <main id="auth-view" class="onboarding hidden">
+    <section class="welcome-panel">
+      <div class="brand-mark">ख</div>
+      <span class="eyebrow">APNI DUKAAN · APNA HISAAB</span>
+      <h1>Khata<br>Ledger</h1>
+      <p>Bol ke likho. Customer ka udhaar, payment aur Monday collection list—sab ek jagah.</p>
+      <div class="trust-list"><span>🎤 Voice-first entry</span><span>🔒 Private local ledger</span><span>📶 Spotty internet friendly</span></div>
+    </section>
+    <section class="auth-card">
+      <div class="auth-block">
+        <span class="kicker">WELCOME BACK</span><h2>Apni dukaan kholiye</h2>
+        <form id="login-form">
+          <label>Email address<input name="email" type="email" autocomplete="email" placeholder="owner@example.com" required></label>
+          <label>Password<input name="password" type="password" autocomplete="current-password" placeholder="Your password" required></label>
+          <button type="submit">Sign in to my shop →</button>
+        </form>
+      </div>
+      <div class="auth-divider"><span>New shop setup</span></div>
+      <div class="auth-block">
+        <span class="kicker">FIRST TIME HERE?</span><h2>Create your private khata</h2>
+        <p class="muted">Tell us about the shop so the ledger feels like yours.</p>
+        <form id="register-form" class="shop-form">
+          <label class="wide">Shop name<input name="shop_name" placeholder="e.g. Kang General Store" required minlength="2" maxlength="100"></label>
+          <label>Owner name<input name="display_name" autocomplete="name" placeholder="e.g. Amrit Kang" required maxlength="80"></label>
+          <label>Mobile number <span class="optional">optional</span><input name="phone" type="tel" autocomplete="tel" placeholder="+91 98765 43210" maxlength="20"></label>
+          <label>Town / city <span class="optional">optional</span><input name="city" autocomplete="address-level2" placeholder="e.g. Jalandhar" maxlength="80"></label>
+          <label>Shop language<select name="preferred_language"><option>Hinglish</option><option>Hindi</option><option>English</option></select></label>
+          <label>Email address<input name="email" type="email" autocomplete="email" placeholder="owner@example.com" required></label>
+          <label>Password<input name="password" type="password" autocomplete="new-password" placeholder="At least 8 characters" required minlength="8"></label>
+          <button type="submit" class="wide">Create my private ledger →</button>
+        </form>
+      </div>
+      <p id="auth-error" class="error hidden" role="alert"></p>
     </section>
   </main>
+
   <div id="app-view" class="hidden">
-  <header><div><span class="eyebrow">LOCAL-FIRST · VOICE-FIRST</span><h1>Khata Ledger</h1><p>Bol ke likho. Hisaab machine par hi rahega.</p></div><div><div class="privacy">☁️ Audio → transcription only<br>🔒 Every rupee stays local</div><p class="account"><span id="account-name"></span> · <button id="logout" class="link-button">Sign out</button></p></div></header>
-  <main>
-    <section class="capture card">
-      <h2>New voice note</h2>
-      <p class="muted">Upload audio for ElevenLabs Scribe, or use a transcript while developing.</p>
-      <form id="note-form">
-        <div class="record-controls"><button type="button" id="record" class="secondary">🎙 Start recording</button><span id="record-status" class="muted"></span></div>
-        <input id="audio" name="audio" type="file" accept="audio/*">
-        <div class="or">or</div>
-        <textarea id="transcript" name="transcript" placeholder="Ramesh bhai 850 rupaye ka ration, Friday tak dega"></textarea>
-        <button type="submit">Add to khata</button>
-      </form>
-      <div id="result" class="result hidden"></div>
-    </section>
-    <section id="review-section" class="card hidden"><div class="section-head"><div><span class="eyebrow">CHECK BEFORE SAVING</span><h2>Needs review</h2></div></div><div id="review-list" class="review-grid"></div></section>
-    <section class="card"><div class="section-head"><h2>Current ledger</h2><button class="secondary" id="refresh">Refresh</button></div><div class="table-wrap"><table><thead><tr><th>Customer</th><th>Outstanding</th><th>Last activity</th><th>Entries</th></tr></thead><tbody id="ledger"></tbody></table></div></section>
-    <section class="card"><div class="section-head"><h2>Transaction history</h2></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Customer</th><th>Type</th><th>Amount</th><th>Due</th><th></th></tr></thead><tbody id="transactions"></tbody></table></div></section>
-    <section class="brief card"><div class="section-head"><div><span class="eyebrow">MONDAY COLLECTION BRIEF</span><h2 id="brief-total">Loading…</h2></div></div><div id="brief-list" class="brief-grid"></div></section>
-  </main>
-  <footer>Transcription is cloud for dialect accuracy; every rupee of data stays on this machine.</footer>
+    <header class="shop-header">
+      <div class="shop-brand"><div class="brand-mark small">ख</div><div><span class="eyebrow">KHATA LEDGER</span><h1 id="shop-name">My Kirana Store</h1><p id="shop-location">Private shop ledger</p></div></div>
+      <div class="account-menu"><span><strong id="account-name"></strong><small id="account-language"></small></span><button id="logout" class="link-button">Sign out</button></div>
+    </header>
+    <main class="dashboard">
+      <section class="hello-strip"><div><span class="kicker">AAJ KA HISAAB</span><h2>Namaste, <span id="owner-greeting">shopkeeper</span> ji 👋</h2><p>Voice note boliye—naam, amount aur due date hum sambhal lenge.</p></div><div class="privacy-pill">🔒 Every rupee stays local</div></section>
+      <section class="stats-grid" aria-label="Ledger summary">
+        <article class="stat-card due"><span>Total udhaar</span><strong id="stat-outstanding">₹0</strong><small>abhi collect karna hai</small></article>
+        <article class="stat-card"><span>Customers</span><strong id="stat-customers">0</strong><small>khata accounts</small></article>
+        <article class="stat-card"><span>Entries</span><strong id="stat-entries">0</strong><small>total transactions</small></article>
+        <article class="stat-card review"><span>Check karna hai</span><strong id="stat-reviews">0</strong><small>notes need review</small></article>
+      </section>
+      <section class="capture card">
+        <div class="capture-copy"><span class="kicker">QUICK ENTRY</span><h2>Naya voice note</h2><p>Jaise normally bolte hain waise boliye: <em>“Ramesh ko 850 ka ration diya, Friday ko dega.”</em></p></div>
+        <form id="note-form">
+          <div class="record-zone"><button type="button" id="record" class="record-button"><span>🎙</span><b>Start recording</b></button><p id="record-status" class="muted">Tap and speak naturally</p></div>
+          <label class="upload-label">Or upload an audio file<input id="audio" name="audio" type="file" accept="audio/*"></label>
+          <div class="or"><span>or type while testing</span></div>
+          <textarea id="transcript" name="transcript" placeholder="Customer ka naam, amount, samaan aur payment date…"></textarea>
+          <button type="submit">Add to khata →</button>
+        </form>
+        <div id="result" class="result hidden" aria-live="polite"></div>
+      </section>
+      <section id="review-section" class="card hidden"><div class="section-head"><div><span class="kicker">CHECK BEFORE SAVING</span><h2>Needs your review</h2><p>AI unsure tha—aap confirm karke hi ledger mein add karein.</p></div></div><div id="review-list" class="review-grid"></div></section>
+      <section class="card"><div class="section-head"><div><span class="kicker">CUSTOMER KHATA</span><h2>Current balances</h2></div><button class="secondary" id="refresh">↻ Refresh</button></div><div class="table-wrap"><table><thead><tr><th>Customer</th><th>Outstanding</th><th>Last activity</th><th>Entries</th></tr></thead><tbody id="ledger"></tbody></table></div></section>
+      <section class="brief card"><div class="section-head"><div><span class="kicker">MONDAY COLLECTION BRIEF</span><h2 id="brief-total">₹0 to collect</h2><p>Sabse important follow-ups pehle.</p></div></div><div id="brief-list" class="brief-grid"></div></section>
+      <section class="card"><div class="section-head"><div><span class="kicker">PASSBOOK</span><h2>Transaction history</h2></div></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Customer</th><th>Type</th><th>Amount</th><th>Due</th><th></th></tr></thead><tbody id="transactions"></tbody></table></div></section>
+    </main>
+    <footer><span>☁️ ElevenLabs transcribes the voice</span><strong>Financial data stays on this machine.</strong><span>🧠 Gemma understands the note locally</span></footer>
   </div>
   <script src="/static/app.js"></script>
 </body>

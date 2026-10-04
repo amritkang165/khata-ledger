@@ -6,7 +6,8 @@ from app.db.sqlite import Ledger
 
 def register(client: TestClient, email: str = "owner@example.com"):
     return client.post("/api/auth/register", json={
-        "display_name": "Shop Owner", "email": email, "password": "strong-pass-123",
+        "shop_name": "Apna Kirana", "display_name": "Shop Owner", "city": "Jalandhar",
+        "preferred_language": "Hinglish", "email": email, "password": "strong-pass-123",
     })
 
 
